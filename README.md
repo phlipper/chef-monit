@@ -31,46 +31,53 @@ The `name` parameter must match a file located in your templates directory. In t
 
 # ATTRIBUTES
 
-## `polling_frequency`
+## polling_frequency
 
 How frequently the monit daemon polls for changes.
 
 The default is `20`.
 
-## `use_syslog`
+## use_syslog
 
 Use syslog for logging instead of a logfile.
 
 The default is `true`.
 
-## `logfile`
+## logfile
 
 If not using syslog, the log file that monit will use.
 
 The default is `/var/log/monit.log`.
 
-## `alert_email`
+## alert_email
 
 Email address that will be notified of events.
 
 The default is `root@localhost`.
 
-## `web_interface`
+## web_interface
 
 Enable the web interface and define credentials.
 
-The default is ```{
+The default is
+
+```
+{
   :enable => false,
   :port => 2812,
   :address => "localhost",
   :allow  => ["localhost", "admin:b1gbr0th3r"]
-}```.
+}
+```
 
-## `mail`
+## mail
 
 Email settings that will be used for notification of events.
 
-The default is ```{
+The default is
+
+```
+{
   :hostname => "localhost",
   :port     => 25
   :username => nil,
@@ -78,7 +85,8 @@ The default is ```{
   :from     => "monit@localhost",
   :tls      => false,
   :timeout  => 30
-}```.
+}
+```
 
 
 # USAGE
