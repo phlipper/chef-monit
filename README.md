@@ -19,12 +19,12 @@ The following platforms are supported by this cookbook, meaning that the recipes
 
 The following will create a monitrc configuration:
 
-`
+```
 monitrc "ssh configuration" do
   name "ssh"
   variables { :category => "system" }
 end
-`
+```
 
 The `name` parameter must match a file located in your templates directory. In the example above, this would be `ssh.monitrc.erb`.
 
@@ -59,18 +59,18 @@ The default is `root@localhost`.
 
 Enable the web interface and define credentials.
 
-The default is `{
+The default is ```{
   :enable => false,
   :port => 2812,
   :address => "localhost",
   :allow  => ["localhost", "admin:b1gbr0th3r"]
-}`.
+}```.
 
 ## `mail`
 
 Email settings that will be used for notification of events.
 
-The default is `{
+The default is ```{
   :hostname => "localhost",
   :port     => 25
   :username => nil,
@@ -78,7 +78,7 @@ The default is `{
   :from     => "monit@localhost",
   :tls      => false,
   :timeout  => 30
-}`.
+}```.
 
 
 # USAGE
