@@ -1,0 +1,36 @@
+# Polling frequency
+set daemon <%= node[:monit][:polling_frequency] %>
+
+# Logging
+<% if node[:monit][:syslog] %>
+set logfile syslog facility log_daemon
+<% else %>
+set logfile <%= node[:monit][:logfile] %>
+<% end %>
+
+# Mail alerts
+set mailserver <%= node[:monit][:mail][:hostname] %> port <%= node[:monit][:mail][:port] %>
+  <% if node[:monit][:mail][:username] -%>
+  username "<%= node[:monit][:mail][:username] %>"
+  <% end -%>
+  <% if node[:monit][:mail][:password] -%>
+  password "<%= node[:monit][:mail][:password] %>"
+  <% end -%>
+  <% if node[:monit][:mail][:tls] -%>
+  using tlsv1
+  <% end -%>
+  with timeout <%= node[:monit][:mail][:timeout] %> seconds
+set mail-format { from: <%= node[:monit][:mail][:from] %> }
+set alert <%= node[:monit][:alert_email] %>
+
+# Web interface
+<% if node[:monit][:web_interface][:enable] %>
+set httpd port <%= node[:monit][:web_interface][:port] %> and
+  use address <%= node[:monit][:web_interface][:address] %>
+  <% node[:monit][:web_interface][:allow].each do |allow| -%>
+  allow <%= allow %>
+  <% end %>
+<% end %>
+
+# Include config files
+include /etc/monit/conf.d/*

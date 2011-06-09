@@ -1,0 +1,7 @@
+check system <%= node[:host] %>
+  if loadavg (1min) > 4 for 2 cycles then alert
+  if loadavg (5min) > 2 for 2 cycles then alert
+  if memory usage > 75% for 2 cycles then alert
+  if cpu usage (user) > 70% for 2 cycles then alert
+  if cpu usage (system) > 30% for 2 cycles then alert
+  if cpu usage (wait) > 20% for 2 cycles then alert

@@ -1,0 +1,41 @@
+{
+  "groupings": {
+
+  },
+  "recommendations": {
+
+  },
+  "platforms": {
+
+  },
+  "license": "Apache v2.0",
+  "maintainer": "Phil Cohen",
+  "suggestions": {
+
+  },
+  "maintainer_email": "github@phlippers.net",
+  "version": "0.1.0",
+  "conflicting": {
+
+  },
+  "description": "Configures monit",
+  "providing": {
+    "monit": [
+
+    ]
+  },
+  "name": "monit",
+  "attributes": {
+
+  },
+  "long_description": "",
+  "recipes": {
+    "monit": ""
+  },
+  "replacing": {
+
+  },
+  "dependencies": {
+
+  }
+}
