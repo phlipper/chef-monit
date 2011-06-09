@@ -28,5 +28,5 @@ end
 
 # build monitrc files
 %w[load ssh].each do |conf|
-  monitrc conf, :app_name => "system"
+  monitrc conf, :category => "system"
 end

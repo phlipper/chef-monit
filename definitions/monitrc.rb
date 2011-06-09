@@ -1,7 +1,7 @@
 define :monitrc, :name => nil, :variables => {} do
   Chef::Log.info("Making monitrc for: #{params[:name]}")
 
-  template "/etc/monit/conf.d/#{params[:name]}.#{params[:variables][:app_name]}.monitrc" do
+  template "/etc/monit/conf.d/#{params[:name]}.monitrc" do
     owner "root"
     group "root"
     mode  "0644"
