@@ -1,6 +1,6 @@
 # DESCRIPTION
 
-Installs the monit package from (http://mmonit.com/monit/). Currently only targeting Ubuntu platform. It's not complicated and would work on other platforms, but that can come later.
+Installs the `monit` package from (http://mmonit.com/monit/). Currently only targeting Ubuntu platform. It's not complicated and would work on other platforms, but that can come later.
 
 
 # REQUIREMENTS
@@ -19,7 +19,7 @@ The following platforms are supported by this cookbook, meaning that the recipes
 
 The following will create a monitrc configuration:
 
-```
+``` ruby
 monitrc "ssh configuration" do
   name "ssh"
   variables { :category => "system" }
@@ -61,7 +61,7 @@ Enable the web interface and define credentials.
 
 The default is
 
-```
+``` ruby
 {
   :enable => false,
   :port => 2812,
@@ -76,7 +76,7 @@ Email settings that will be used for notification of events.
 
 The default is
 
-```
+``` ruby
 {
   :hostname => "localhost",
   :port     => 25
@@ -91,7 +91,7 @@ The default is
 
 # USAGE
 
-This cookbook installs denyhosts if not present and pulls updates if it is installed on the system.
+This cookbook installs monit if not present and pulls updates if it is installed on the system.
 
 
 # LICENSE and AUTHOR:
