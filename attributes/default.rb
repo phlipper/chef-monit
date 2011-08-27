@@ -17,24 +17,24 @@
 # limitations under the License.
 #
 
-default["monit"]["polling_frequency"] = 20
-default["monit"]["use_syslog"]        = true
+default["monit"]["polling_frequency"] = "20"
+default["monit"]["use_syslog"]        = "true"
 default["monit"]["logfile"]           = "/var/log/monit.log"
 default["monit"]["alert_email"]       = "root@localhost"
 
 default["monit"]["web_interface"] = {
-  :enable => false,
-  :port => 2812,
+  :enable => "false",
+  :port => "2812",
   :address => "localhost",
   :allow  => ["localhost", "admin:b1gbr0th3r"]
 }
 
 default["monit"]["mail"] = {
   :hostname => "localhost",
-  :port     => 25
-  :username => nil,
-  :password => nil,
+  :port     => "25"
+  :username => "",
+  :password => "",
   :from     => "monit@localhost",
-  :tls      => false,
-  :timeout  => 30
+  :tls      => "",
+  :timeout  => ""
 }

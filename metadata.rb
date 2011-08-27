@@ -15,7 +15,7 @@ attribute "monit/polling_frequency",
 attribute "monit/use_syslog",
   :display_name => "Use Syslog",
   :description  => "Use syslog for logging instead of a logfile",
-  :default      => true
+  :default      => "true"
 
 attribute "monit/logfile",
   :display_name => "Log File",
@@ -26,7 +26,7 @@ attribute "monit/web_interface",
   :display_name => "Web Interface Settings",
   :description  => "Enable the web interface and define credentials",
   :default      => {
-    :enable => false, :port => "2812", :address => "localhost",
+    :enable => "false", :port => "2812", :address => "localhost",
     :allow  => ["localhost", "admin:b1gbr0th3r"]
   }
 
@@ -41,9 +41,9 @@ attribute "monit/mail",
   :default      => {
     :hostname => "localhost",
     :port     => "25",
-    :username => nil,
-    :password => nil,
+    :username => "",
+    :password => "",
     :from     => "monit@localhost",
-    :tls      => false,
+    :tls      => "false",
     :timeout  => "30"
   }

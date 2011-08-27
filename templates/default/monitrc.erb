@@ -2,7 +2,7 @@
 set daemon <%= node[:monit][:polling_frequency] %>
 
 # Logging
-<% if node[:monit][:syslog] %>
+<% if node[:monit][:syslog] == "true" %>
 set logfile syslog facility log_daemon
 <% else %>
 set logfile <%= node[:monit][:logfile] %>
@@ -10,13 +10,13 @@ set logfile <%= node[:monit][:logfile] %>
 
 # Mail alerts
 set mailserver <%= node[:monit][:mail][:hostname] %> port <%= node[:monit][:mail][:port] %>
-  <% if node[:monit][:mail][:username] -%>
+  <% if !node[:monit][:mail][:username].empty? -%>
   username "<%= node[:monit][:mail][:username] %>"
   <% end -%>
-  <% if node[:monit][:mail][:password] -%>
+  <% if !node[:monit][:mail][:password].empty? -%>
   password "<%= node[:monit][:mail][:password] %>"
   <% end -%>
-  <% if node[:monit][:mail][:tls] -%>
+  <% if node[:monit][:mail][:tls] == "true" -%>
   using tlsv1
   <% end -%>
   with timeout <%= node[:monit][:mail][:timeout] %> seconds
@@ -24,7 +24,7 @@ set mail-format { from: <%= node[:monit][:mail][:from] %> }
 set alert <%= node[:monit][:alert_email] %>
 
 # Web interface
-<% if node[:monit][:web_interface][:enable] %>
+<% if node[:monit][:web_interface][:enable] == "true" %>
 set httpd port <%= node[:monit][:web_interface][:port] %> and
   use address <%= node[:monit][:web_interface][:address] %>
   <% node[:monit][:web_interface][:allow].each do |allow| -%>
