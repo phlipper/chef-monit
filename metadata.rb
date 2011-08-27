@@ -40,7 +40,7 @@ attribute "monit/mail",
   :description  => "Email settings that will be used for notification of events",
   :default      => {
     :hostname => "localhost",
-    :port     => 25
+    :port     => 25,
     :username => nil,
     :password => nil,
     :from     => "monit@localhost",
