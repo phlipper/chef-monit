@@ -31,7 +31,7 @@ default["monit"]["web_interface"] = {
 
 default["monit"]["mail"] = {
   :hostname => "localhost",
-  :port     => "25"
+  :port     => "25",
   :username => "",
   :password => "",
   :from     => "monit@localhost",
