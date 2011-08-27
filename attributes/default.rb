@@ -23,18 +23,20 @@ default["monit"]["logfile"]           = "/var/log/monit.log"
 default["monit"]["alert_email"]       = "root@localhost"
 
 default["monit"]["web_interface"] = {
-  :enable  => "false",
-  :port    => "2812",
+  :enable  => true,
+  :port    => 2812,
   :address => "localhost",
   :allow   => ["localhost", "admin:b1gbr0th3r"]
 }
 
 default["monit"]["mail"] = {
   :hostname => "localhost",
-  :port     => "25",
-  :username => "",
-  :password => "",
-  :from     => "monit@localhost",
-  :tls      => "false",
-  :timeout  => "30"
+  :port     => 25,
+  :username => nil,
+  :password => nil,
+  :from     => "monit@$HOST",
+  :subject  => "$SERVICE $EVENT at $DATE",
+  :message  => "Monit $ACTION $SERVICE at $DATE on $HOST,\n\nDutifully,\nMonit",
+  :tls      => false,
+  :timeout  => 30
 }

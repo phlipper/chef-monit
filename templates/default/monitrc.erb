@@ -9,22 +9,27 @@ set logfile <%= node[:monit][:logfile] %>
 <% end %>
 
 # Mail alerts
+set alert <%= node[:monit][:alert_email] %>
 set mailserver <%= node[:monit][:mail][:hostname] %> port <%= node[:monit][:mail][:port] %>
-  <% if !node[:monit][:mail][:username].empty? -%>
+  <% if node[:monit][:mail][:username] -%>
   username "<%= node[:monit][:mail][:username] %>"
   <% end -%>
-  <% if !node[:monit][:mail][:password].empty? -%>
+  <% if node[:monit][:mail][:password] -%>
   password "<%= node[:monit][:mail][:password] %>"
   <% end -%>
-  <% if node[:monit][:mail][:tls] == "true" -%>
+  <% if node[:monit][:mail][:tls] -%>
   using tlsv1
   <% end -%>
   with timeout <%= node[:monit][:mail][:timeout] %> seconds
-set mail-format { from: <%= node[:monit][:mail][:from] %> }
-set alert <%= node[:monit][:alert_email] %>
+
+set mail-format {
+  from: <%= node[:monit][:mail][:from] %>
+  subject: <%= node[:monit][:mail][:subject] %>
+  message: <%= node[:monit][:mail][:message] %>
+}
 
 # Web interface
-<% if node[:monit][:web_interface][:enable] == "true" %>
+<% if node[:monit][:web_interface][:enable] %>
 set httpd port <%= node[:monit][:web_interface][:port] %> and
   use address <%= node[:monit][:web_interface][:address] %>
   <% node[:monit][:web_interface][:allow].each do |allow| -%>
