@@ -10,7 +10,7 @@ end
 attribute "monit/polling_frequency",
   :display_name => "Polling Frequency",
   :description  => "How frequently the monit daemon polls for changes",
-  :default      => 20
+  :default      => "20"
 
 attribute "monit/use_syslog",
   :display_name => "Use Syslog",
@@ -26,7 +26,7 @@ attribute "monit/web_interface",
   :display_name => "Web Interface Settings",
   :description  => "Enable the web interface and define credentials",
   :default      => {
-    :enable => false, :port => 2812, :address => "localhost",
+    :enable => false, :port => "2812", :address => "localhost",
     :allow  => ["localhost", "admin:b1gbr0th3r"]
   }
 
@@ -40,10 +40,10 @@ attribute "monit/mail",
   :description  => "Email settings that will be used for notification of events",
   :default      => {
     :hostname => "localhost",
-    :port     => 25,
+    :port     => "25",
     :username => nil,
     :password => nil,
     :from     => "monit@localhost",
     :tls      => false,
-    :timeout  => 30
+    :timeout  => "30"
   }
