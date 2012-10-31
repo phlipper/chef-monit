@@ -49,7 +49,3 @@ else
   default["monit"]["main_config_path"] = "/etc/monit/monitrc"
   default["monit"]["includes_dir"] = "/etc/monit/conf.d"
 end
-
-
-default["monit"]["configs"] = []
-

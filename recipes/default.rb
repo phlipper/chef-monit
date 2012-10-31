@@ -50,9 +50,3 @@ end
 %w[ssh].each do |conf|
   monitrc conf, :category => "system"
 end
-
-node["monit"]["configs"].each do |conf|
-  monitrc conf, :category => "system"
-end
-
-
