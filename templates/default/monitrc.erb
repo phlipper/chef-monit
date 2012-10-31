@@ -28,8 +28,8 @@ set mail-format {
   message: <%= node[:monit][:mail][:message] %>
 }
 
-# Web interface
 <% if node[:monit][:web_interface][:enable] %>
+# Web interface
 set httpd port <%= node[:monit][:web_interface][:port] %> and
   use address <%= node[:monit][:web_interface][:address] %>
   <% node[:monit][:web_interface][:allow].each do |allow| -%>
@@ -38,4 +38,4 @@ set httpd port <%= node[:monit][:web_interface][:port] %> and
 <% end %>
 
 # Include config files
-include /etc/monit/conf.d/*
+include <%= node["monit"]["includes_dir"] %>/*

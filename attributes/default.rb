@@ -40,3 +40,12 @@ default["monit"]["mail"] = {
   :tls      => false,
   :timeout  => 30
 }
+
+case platform
+when "redhat","centos","fedora"
+  default["monit"]["main_config_path"] = "/etc/monit.conf"
+  default["monit"]["includes_dir"] = "/etc/monit.d"
+else
+  default["monit"]["main_config_path"] = "/etc/monit/monitrc"
+  default["monit"]["includes_dir"] = "/etc/monit/conf.d"
+end
