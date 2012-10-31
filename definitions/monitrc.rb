@@ -1,13 +1,13 @@
 define :monitrc, :name => nil, :variables => {} do
   Chef::Log.info("Making monitrc for: #{params[:name]}")
 
-  template "/etc/monit/conf.d/#{params[:name]}.monitrc" do
+  template "#{node["monit"]["includes_dir"]}/#{params[:name]}.monitrc" do
     owner "root"
     group "root"
     mode  "0644"
     source "#{params[:name]}.monitrc.erb"
     variables params[:variables]
-    notifies :run, resources(:execute => "restart-monit")
+    notifies :restart, resources(:service => "monit")
     action :create
   end
 end
