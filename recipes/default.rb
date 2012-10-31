@@ -47,6 +47,6 @@ else
 end
 
 # build monitrc files
-%w[ssh].each do |conf|
+%w[load ssh].each do |conf|
   monitrc conf, :category => "system"
 end
