@@ -1,8 +1,13 @@
+#
+# Cookbook Name:: monit
+# Recipe:: default
+#
+
 package "monit" do
   action :install
 end
 
-template "#{node["monit"]["main_config_path"]}" do
+template node["monit"]["main_config_path"] do
   owner  "root"
   group  "root"
   mode   "0700"
@@ -17,14 +22,16 @@ end
 
 service "monit" do
   service_name "monit"
-  case node['platform']
-  when "redhat","centos","scientific","fedora","suse","amazon"
+
+  case node["platform"]
+  when platform_family?("rhel"), platform_family?("fedora"), platform_family?("suse")
     start_command "/sbin/service monit start"
     restart_command "/sbin/service monit restart"
-  when "debian","ubuntu"
+  when platform_family?("debian")
     start_command "/usr/sbin/invoke-rc.d monit start"
     restart_command "/usr/sbin/invoke-rc.d monit restart"
   end
+
   supports value_for_platform(
     "debian" => { "4.0" => [ :restart, :start ], "default" => [ :restart, :start ] },
     "ubuntu" => { "default" => [ :restart, :start ] },
@@ -36,17 +43,17 @@ service "monit" do
   action :enable
 end
 
-case node['platform']
-when "debian", "ubuntu"
+if platform_family?("debian")
   # enable startup
   execute "enable-monit-startup" do
     command "/bin/sed s/startup=0/startup=1/ -i /etc/default/monit"
     not_if "grep 'startup=1' /etc/default/monit"
   end
-else 
 end
 
 # build monitrc files
 %w[load ssh].each do |conf|
-  monitrc conf, :category => "system"
+  monit_monitrc conf do
+    variables({ category: "system" })
+  end
 end

@@ -2,26 +2,25 @@
 # Cookbook Name:: monit
 # Attributes:: default
 #
-# Copyright 2011, Phil Cohen
+# Author:: Phil Cohen <github@phlippers.net>
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+# Copyright 2011-2012, Phil Cohen
 #
 
-default["monit"]["polling_frequency"] = "20"
-default["monit"]["use_syslog"]        = "true"
+
+# How frequently the monit daemon polls for changes.
+default["monit"]["polling_frequency"] = 20
+
+# Use syslog for logging instead of a logfile.
+default["monit"]["use_syslog"]        = true
+
+# If not using syslog, the log file that monit will use.
 default["monit"]["logfile"]           = "/var/log/monit.log"
+
+# Email address that will be notified of events.
 default["monit"]["alert_email"]       = "root@localhost"
 
+# Enable the web interface and define credentials.
 default["monit"]["web_interface"] = {
   :enable  => true,
   :port    => 2812,
@@ -29,6 +28,7 @@ default["monit"]["web_interface"] = {
   :allow   => ["localhost", "admin:b1gbr0th3r"]
 }
 
+# Email settings that will be used for notification of events.
 default["monit"]["mail"] = {
   :hostname => "localhost",
   :port     => 25,
@@ -41,11 +41,11 @@ default["monit"]["mail"] = {
   :timeout  => 30
 }
 
-case platform
-when "redhat","centos","fedora"
+case node["platform"]
+when platform_family?("rhel"), platform_family?("fedora"), platform_family?("suse")
   default["monit"]["main_config_path"] = "/etc/monit.conf"
-  default["monit"]["includes_dir"] = "/etc/monit.d"
+  default["monit"]["includes_dir"]     = "/etc/monit.d"
 else
   default["monit"]["main_config_path"] = "/etc/monit/monitrc"
-  default["monit"]["includes_dir"] = "/etc/monit/conf.d"
+  default["monit"]["includes_dir"]     = "/etc/monit/conf.d"
 end
