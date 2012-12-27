@@ -1,38 +1,38 @@
 # Polling frequency
-set daemon <%= node[:monit][:polling_frequency] %>
+set daemon <%= node["monit"]["polling_frequency"] %>
 
 # Logging
-<% if node[:monit][:syslog] == "true" %>
+<% if node["monit"]["syslog"] == "true" %>
 set logfile syslog facility log_daemon
 <% else %>
-set logfile <%= node[:monit][:logfile] %>
+set logfile <%= node["monit"]["logfile"] %>
 <% end %>
 
 # Mail alerts
-set alert <%= node[:monit][:alert_email] %>
-set mailserver <%= node[:monit][:mail][:hostname] %> port <%= node[:monit][:mail][:port] %>
-  <% if node[:monit][:mail][:username] -%>
-  username "<%= node[:monit][:mail][:username] %>"
+set alert <%= node["monit"]["alert_email"] %>
+set mailserver <%= node["monit"]["mail"]["hostname"] %> port <%= node["monit"]["mail"]["port"] %>
+  <% if node["monit"]["mail"]["username"] -%>
+  username "<%= node["monit"]["mail"]["username"] %>"
   <% end -%>
-  <% if node[:monit][:mail][:password] -%>
-  password "<%= node[:monit][:mail][:password] %>"
+  <% if node["monit"]["mail"]["password"] -%>
+  password "<%= node["monit"]["mail"]["password"] %>"
   <% end -%>
-  <% if node[:monit][:mail][:tls] -%>
+  <% if node["monit"]["mail"]["tls"] -%>
   using tlsv1
   <% end -%>
-  with timeout <%= node[:monit][:mail][:timeout] %> seconds
+  with timeout <%= node["monit"]["mail"]["timeout"] %> seconds
 
 set mail-format {
-  from: <%= node[:monit][:mail][:from] %>
-  subject: <%= node[:monit][:mail][:subject] %>
-  message: <%= node[:monit][:mail][:message] %>
+  from: <%= node["monit"]["mail"]["from"] %>
+  subject: <%= node["monit"]["mail"]["subject"] %>
+  message: <%= node["monit"]["mail"]["message"] %>
 }
 
-<% if node[:monit][:web_interface][:enable] %>
+<% if node["monit"]["web_interface"]["enable"] %>
 # Web interface
-set httpd port <%= node[:monit][:web_interface][:port] %> and
-  use address <%= node[:monit][:web_interface][:address] %>
-  <% node[:monit][:web_interface][:allow].each do |allow| -%>
+set httpd port <%= node["monit"]["web_interface"]["port"] %> and
+  use address <%= node["monit"]["web_interface"]["address"] %>
+  <% node["monit"]["web_interface"]["allow"].each do |allow| -%>
   allow <%= allow %>
   <% end %>
 <% end %>
