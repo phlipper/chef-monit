@@ -3,8 +3,8 @@ maintainer        "Phil Cohen"
 maintainer_email  "github@phlippers.net"
 license           "MIT"
 description       "Configures monit"
-version           "0.1"
 long_description  "Please refer to README.md"
+version           "1.0.0"
 
 recipe "monit", "Sets up the service definition and default checks."
 
