@@ -28,7 +28,7 @@ The following platforms are supported by this cookbook, meaning that the recipes
 
 ## Resources
 
-### `monitrc`
+### `monit_monitrc`
 
 The following will create a monitrc configuration:
 
