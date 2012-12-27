@@ -1,113 +1,123 @@
-# DESCRIPTION
+# chef-monit  [![Build Status](https://secure.travis-ci.org/phlipper/chef-monit.png)](http://travis-ci.org/phlipper/chef-monit) [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/phlipper/chef-monit)
 
-Installs the `monit` package from (http://mmonit.com/monit/). Currently only targeting Ubuntu platform. It's not complicated and would work on other platforms, but that can come later.
+## Description
+
+Installs the `monit` package from (http://mmonit.com/monit/).
 
 
-# REQUIREMENTS
+## Requirements
 
-## Supported Platforms
+### Supported Platforms
 
 The following platforms are supported by this cookbook, meaning that the recipes run on these platforms without error:
 
 * Ubuntu
 * Debian
+* RedHat
+* CentOS
+* Scientific
+* Fedora
+* SUSE
+* Amazon
 
 
-# DEFINITIONS
+## Recipes
 
-## monitrc
+* `monit` - The default recipe. Sets up the service definition and default checks.
+
+
+## Resources
+
+### `monitrc`
 
 The following will create a monitrc configuration:
 
-``` ruby
-monitrc "ssh configuration" do
-  name "ssh"
-  variables { :category => "system" }
+```ruby
+monit_monitrc "ssh" do
+  variables({ category: "system" })
 end
 ```
 
 The `name` parameter must match a file located in your templates directory. In the example above, this would be `ssh.monitrc.erb`.
 
+The `custom_variables` option within the block is optional, and can contain a list of key-value pairs to assign within your template.
 
-# ATTRIBUTES
 
-## polling_frequency
+## Usage
 
-How frequently the monit daemon polls for changes.
+This cookbook installs the monit components if not present, and pulls updates if they are installed on the system.
 
-The default is `20`.
 
-## use_syslog
+## Attributes
 
-Use syslog for logging instead of a logfile.
+```ruby
+# How frequently the monit daemon polls for changes.
+default["monit"]["polling_frequency"] = 20
 
-The default is `true`.
+# Use syslog for logging instead of a logfile.
+default["monit"]["use_syslog"]        = true
 
-## logfile
+# If not using syslog, the log file that monit will use.
+default["monit"]["logfile"]           = "/var/log/monit.log"
 
-If not using syslog, the log file that monit will use.
+# Email address that will be notified of events.
+default["monit"]["alert_email"]       = "root@localhost"
 
-The default is `/var/log/monit.log`.
-
-## alert_email
-
-Email address that will be notified of events.
-
-The default is `root@localhost`.
-
-## web_interface
-
-Enable the web interface and define credentials.
-
-The default is
-
-``` ruby
-{
-  :enable => false,
-  :port => 2812,
+# Enable the web interface and define credentials.
+default["monit"]["web_interface"] = {
+  :enable  => true,
+  :port    => 2812,
   :address => "localhost",
-  :allow  => ["localhost", "admin:b1gbr0th3r"]
+  :allow   => ["localhost", "admin:b1gbr0th3r"]
 }
-```
 
-## mail
-
-Email settings that will be used for notification of events.
-
-The default is
-
-``` ruby
-{
+# Email settings that will be used for notification of events.
+default["monit"]["mail"] = {
   :hostname => "localhost",
-  :port     => 25
+  :port     => 25,
   :username => nil,
   :password => nil,
-  :from     => "monit@localhost",
+  :from     => "monit@$HOST",
+  :subject  => "$SERVICE $EVENT at $DATE",
+  :message  => "Monit $ACTION $SERVICE at $DATE on $HOST,\n\nDutifully,\nMonit",
   :tls      => false,
   :timeout  => 30
 }
+
+case platform
+when "redhat", "centos", "fedora"
+  default["monit"]["main_config_path"] = "/etc/monit.conf"
+  default["monit"]["includes_dir"]     = "/etc/monit.d"
+else
+  default["monit"]["main_config_path"] = "/etc/monit/monitrc"
+  default["monit"]["includes_dir"]     = "/etc/monit/conf.d"
+end
 ```
 
 
-# USAGE
+## Contributors
 
-This cookbook installs monit if not present and pulls updates if it is installed on the system.
+Many thanks go to the following [contributors](https://github.com/phlipper/chef-monit/graphs/contributors) who have helped to make this cookbook even better:
+
+* **[@werdan](https://github.com/werdan)**
+    * add support for redhat-flavored systems
+* **[@auser](https://github.com/auser)**
+    * add missing metadata
 
 
-# LICENSE and AUTHOR:
+## Contributing
 
-Author:: Phil Cohen (<github@phlippers.net>)
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Added some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request
 
-Copyright:: 2011, Phil Cohen
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+## License
 
-    http://www.apache.org/licenses/LICENSE-2.0
+**chef-monit**
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+* Freely distributable and licensed under the [MIT license](http://phlipper.mit-license.org/2011-2012/license.html).
+* Copyright (c) 2011-2012 Phil Cohen (github@phlippers.net) [![endorse](http://api.coderwall.com/phlipper/endorsecount.png)](http://coderwall.com/phlipper)
+* http://phlippers.net/
