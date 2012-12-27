@@ -1,3 +1,4 @@
+name              "monit"
 maintainer        "Phil Cohen"
 maintainer_email  "github@phlippers.net"
 description       "Configures monit"
