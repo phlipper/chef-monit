@@ -1,0 +1,183 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>chef-monit by phlipper</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>chef-monit</h1>
+        <p>Chef cookbook for monit package</p>
+        <p class="view"><a href="https://github.com/phlipper/chef-monit">View the Project on GitHub <small>phlipper/chef-monit</small></a></p>
+        <ul>
+          <li><a href="https://github.com/phlipper/chef-monit/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/phlipper/chef-monit/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/phlipper/chef-monit">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <p><a href="http://travis-ci.org/phlipper/chef-monit"><img src="https://secure.travis-ci.org/phlipper/chef-monit.png" alt="Build Status"></a> <a href="https://codeclimate.com/github/phlipper/chef-monit"><img src="https://codeclimate.com/badge.png" alt="Code Climate"></a></p>
+
+<h2>Description</h2>
+
+<p>Installs the <code>monit</code> package from (<a href="http://mmonit.com/monit/">http://mmonit.com/monit/</a>).</p>
+
+<h2>Requirements</h2>
+
+<h3>Supported Platforms</h3>
+
+<p>The following platforms are supported by this cookbook, meaning that the recipes run on these platforms without error:</p>
+
+<ul>
+<li>Ubuntu</li>
+<li>Debian</li>
+<li>RedHat</li>
+<li>CentOS</li>
+<li>Scientific</li>
+<li>Fedora</li>
+<li>SUSE</li>
+<li>Amazon</li>
+</ul><h2>Recipes</h2>
+
+<ul>
+<li>
+<code>monit</code> - The default recipe. Sets up the service definition and default checks.</li>
+</ul><h2>Resources</h2>
+
+<h3><code>monit_monitrc</code></h3>
+
+<p>The following will create a monitrc configuration:</p>
+
+<div class="highlight"><pre><span class="n">monit_monitrc</span> <span class="s2">"ssh"</span> <span class="k">do</span>
+  <span class="n">variables</span><span class="p">({</span> <span class="n">category</span><span class="p">:</span> <span class="s2">"system"</span> <span class="p">})</span>
+<span class="k">end</span>
+</pre></div>
+
+<p>The <code>name</code> parameter must match a file located in your templates directory. In the example above, this would be <code>ssh.monitrc.erb</code>.</p>
+
+<p>The <code>custom_variables</code> option within the block is optional, and can contain a list of key-value pairs to assign within your template.</p>
+
+<h2>Usage</h2>
+
+<p>This cookbook installs the monit components if not present, and pulls updates if they are installed on the system.</p>
+
+<h2>Attributes</h2>
+
+<div class="highlight"><pre><span class="c1"># How frequently the monit daemon polls for changes.</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"polling_frequency"</span><span class="o">]</span> <span class="o">=</span> <span class="mi">20</span>
+
+<span class="c1"># Use syslog for logging instead of a logfile.</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"use_syslog"</span><span class="o">]</span>        <span class="o">=</span> <span class="kp">true</span>
+
+<span class="c1"># If not using syslog, the log file that monit will use.</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"logfile"</span><span class="o">]</span>           <span class="o">=</span> <span class="s2">"/var/log/monit.log"</span>
+
+<span class="c1"># Email address that will be notified of events.</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"alert_email"</span><span class="o">]</span>       <span class="o">=</span> <span class="s2">"root@localhost"</span>
+
+<span class="c1"># Enable the web interface and define credentials.</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"web_interface"</span><span class="o">]</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="ss">:enable</span>  <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span>
+  <span class="ss">:port</span>    <span class="o">=&gt;</span> <span class="mi">2812</span><span class="p">,</span>
+  <span class="ss">:address</span> <span class="o">=&gt;</span> <span class="s2">"localhost"</span><span class="p">,</span>
+  <span class="ss">:allow</span>   <span class="o">=&gt;</span> <span class="o">[</span><span class="s2">"localhost"</span><span class="p">,</span> <span class="s2">"admin:b1gbr0th3r"</span><span class="o">]</span>
+<span class="p">}</span>
+
+<span class="c1"># Email settings that will be used for notification of events.</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"mail"</span><span class="o">]</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="ss">:hostname</span> <span class="o">=&gt;</span> <span class="s2">"localhost"</span><span class="p">,</span>
+  <span class="ss">:port</span>     <span class="o">=&gt;</span> <span class="mi">25</span><span class="p">,</span>
+  <span class="ss">:username</span> <span class="o">=&gt;</span> <span class="kp">nil</span><span class="p">,</span>
+  <span class="ss">:password</span> <span class="o">=&gt;</span> <span class="kp">nil</span><span class="p">,</span>
+  <span class="ss">:from</span>     <span class="o">=&gt;</span> <span class="s2">"monit@$HOST"</span><span class="p">,</span>
+  <span class="ss">:subject</span>  <span class="o">=&gt;</span> <span class="s2">"$SERVICE $EVENT at $DATE"</span><span class="p">,</span>
+  <span class="ss">:message</span>  <span class="o">=&gt;</span> <span class="s2">"Monit $ACTION $SERVICE at $DATE on $HOST,</span><span class="se">\n\n</span><span class="s2">Dutifully,</span><span class="se">\n</span><span class="s2">Monit"</span><span class="p">,</span>
+  <span class="ss">:tls</span>      <span class="o">=&gt;</span> <span class="kp">false</span><span class="p">,</span>
+  <span class="ss">:timeout</span>  <span class="o">=&gt;</span> <span class="mi">30</span>
+<span class="p">}</span>
+
+<span class="k">case</span> <span class="n">platform</span>
+<span class="k">when</span> <span class="s2">"redhat"</span><span class="p">,</span> <span class="s2">"centos"</span><span class="p">,</span> <span class="s2">"fedora"</span>
+  <span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"main_config_path"</span><span class="o">]</span> <span class="o">=</span> <span class="s2">"/etc/monit.conf"</span>
+  <span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"includes_dir"</span><span class="o">]</span>     <span class="o">=</span> <span class="s2">"/etc/monit.d"</span>
+<span class="k">else</span>
+  <span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"main_config_path"</span><span class="o">]</span> <span class="o">=</span> <span class="s2">"/etc/monit/monitrc"</span>
+  <span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"includes_dir"</span><span class="o">]</span>     <span class="o">=</span> <span class="s2">"/etc/monit/conf.d"</span>
+<span class="k">end</span>
+</pre></div>
+
+<h2>Contributors</h2>
+
+<p>Many thanks go to the following <a href="https://github.com/phlipper/chef-monit/graphs/contributors">contributors</a> who have helped to make this cookbook even better:</p>
+
+<ul>
+<li>
+<strong><a href="https://github.com/werdan">@werdan</a></strong>
+
+<ul>
+<li>add support for redhat-flavored systems</li>
+</ul>
+</li>
+<li>
+<strong><a href="https://github.com/auser">@auser</a></strong>
+
+<ul>
+<li>add missing metadata</li>
+</ul>
+</li>
+<li>
+<strong><a href="https://github.com/arrowcircle">@arrowcircle</a></strong>
+
+<ul>
+<li>update syntax to be Ruby 1.8-compatible</li>
+</ul>
+</li>
+</ul><h2>Contributing</h2>
+
+<ol>
+<li>Fork it</li>
+<li>Create your feature branch (<code>git checkout -b my-new-feature</code>)</li>
+<li>Commit your changes (<code>git commit -am 'Added some feature'</code>)</li>
+<li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
+<li>Create new Pull Request</li>
+</ol><h2>License</h2>
+
+<p><strong>chef-monit</strong></p>
+
+<ul>
+<li>Freely distributable and licensed under the <a href="http://phlipper.mit-license.org/2011-2012/license.html">MIT license</a>.</li>
+<li>Copyright (c) 2011-2012 Phil Cohen (<a href="mailto:github@phlippers.net">github@phlippers.net</a>) <a href="http://coderwall.com/phlipper"><img src="http://api.coderwall.com/phlipper/endorsecount.png" alt="endorse"></a>
+</li>
+<li><a href="http://phlippers.net/">http://phlippers.net/</a></li>
+</ul>
+      </section>
+    </div>
+    <footer>
+      <p>Project maintained by <a href="https://github.com/phlipper">phlipper</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-10172882-2");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
