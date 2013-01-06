@@ -103,6 +103,8 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
     * add support for redhat-flavored systems
 * **[@auser](https://github.com/auser)**
     * add missing metadata
+* **[@arrowcircle](https://github.com/arrowcircle)**
+    * update syntax to be Ruby 1.8-compatible
 
 
 ## Contributing
