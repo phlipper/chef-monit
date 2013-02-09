@@ -40,7 +40,7 @@ end
 
 The `name` parameter must match a file located in your templates directory. In the example above, this would be `ssh.monitrc.erb`.
 
-The `custom_variables` option within the block is optional, and can contain a list of key-value pairs to assign within your template.
+The `variables` option within the block is optional, and can contain a list of key-value pairs to assign within your template.
 
 
 ## Usage
