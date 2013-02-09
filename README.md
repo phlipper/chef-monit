@@ -105,6 +105,8 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
     * add missing metadata
 * **[@arrowcircle](https://github.com/arrowcircle)**
     * update syntax to be Ruby 1.8-compatible
+* **[@dwradcliffe](https://github.com/dwradcliffe)**
+    * typo fix for README
 
 
 ## Contributing
