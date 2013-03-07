@@ -51,8 +51,8 @@ if platform_family?("debian")
   end
 end
 
-# build monitrc files
-%w[load ssh].each do |conf|
+# build default monitrc files
+node["monit"]["default_monitrc_configs"].each do |conf|
   monit_monitrc conf do
     variables({ category: "system" })
   end
