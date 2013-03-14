@@ -54,6 +54,6 @@ end
 # build default monitrc files
 node["monit"]["default_monitrc_configs"].each do |conf|
   monit_monitrc conf do
-    variables({ category: "system" })
+    variables(:category => "system")
   end
 end
