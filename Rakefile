@@ -4,9 +4,11 @@ task default: :foodcritic
 
 desc "Runs foodcritic linter"
 task :foodcritic do
-  Rake::Task[:prepare_sandbox].execute
+  if RUBY_VERSION >= "1.9"
+    Rake::Task[:prepare_sandbox].execute
 
-  sh "bundle exec foodcritic -f any #{sandbox_path}"
+    sh "bundle exec foodcritic -f any #{sandbox_path}"
+  end
 end
 
 desc "Runs knife cookbook test"
