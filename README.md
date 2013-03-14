@@ -113,7 +113,7 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
     * typo fix for README
 * **[@tjwallace](https://github.com/tjwallace)**
     * load default monitrc configs from an attribute
-* **[@tomdz](https://github.com/tjwallace)**
+* **[@tomdz](https://github.com/tomdz)**
     * Ruby 1.8.x compatibility fix
     * add support for templates in different cookbooks
 
