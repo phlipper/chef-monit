@@ -7,6 +7,14 @@ package "monit" do
   action :install
 end
 
+if node["monit"]["mail"]["tls"] != nil
+  Chef::Log.warn("node[\"monit\"][\"mail\"][\"tls\"] is deprecated. Use node[\"monit\"][\"mail\"][\"security\"] = 'SSLV2'|'SSLV3'|'TLSV1'")
+  unless node["monit"]["mail"]["security"].to_s.empty?
+    Chef::Log.warn("node[\"monit\"][\"mail\"][\"security\"] has precedence over deprecated node[\"monit\"][\"mail\"][\"tls\"]")
+  end
+end
+
+
 template node["monit"]["main_config_path"] do
   owner  "root"
   group  "root"
