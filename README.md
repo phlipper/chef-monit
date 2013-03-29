@@ -117,6 +117,8 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
 * **[@tomdz](https://github.com/tomdz)**
     * Ruby 1.8.x compatibility fix
     * add support for templates in different cookbooks
+* **[@alexism](https://github.com/alexism)**
+    * support other security protocols
 
 
 ## Contributing
