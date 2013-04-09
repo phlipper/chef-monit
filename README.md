@@ -122,6 +122,8 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
     * add support for templates in different cookbooks
 * **[@alexism](https://github.com/alexism)**
     * support other security protocols
+* **[@fixlr](https://github.com/fixlr)**
+    * add `mail_alerts` attribute
 
 
 ## Contributing
