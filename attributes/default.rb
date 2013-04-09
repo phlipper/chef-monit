@@ -17,6 +17,9 @@ default["monit"]["use_syslog"]        = true
 # If not using syslog, the log file that monit will use.
 default["monit"]["logfile"]           = "/var/log/monit.log"
 
+# Enable emails for internal monit alerts
+default["monit"]["mail_alerts"]       = true
+
 # Email address that will be notified of events.
 default["monit"]["alert_email"]       = "root@localhost"
 
