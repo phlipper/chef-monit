@@ -124,6 +124,8 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
     * support other security protocols
 * **[@fixlr](https://github.com/fixlr)**
     * add `mail_alerts` attribute
+* **[@darron](https://github.com/darron)**
+    * add descriptions to email notifications
 
 
 ## Contributing
