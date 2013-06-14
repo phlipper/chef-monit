@@ -31,11 +31,11 @@ end
 service "monit" do
   service_name "monit"
 
-  case node["platform"]
-  when platform_family?("rhel"), platform_family?("fedora"), platform_family?("suse")
+  case node["platform_family"]
+  when "rhel", "fedora", "suse"
     start_command "/sbin/service monit start"
     restart_command "/sbin/service monit restart"
-  when platform_family?("debian")
+  when "debian"
     start_command "/usr/sbin/invoke-rc.d monit start"
     restart_command "/usr/sbin/invoke-rc.d monit restart"
   end
