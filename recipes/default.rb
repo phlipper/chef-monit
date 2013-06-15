@@ -20,6 +20,7 @@ template node["monit"]["main_config_path"] do
   group  "root"
   mode   "0700"
   source "monitrc.erb"
+  notifies :restart, "service[monit]", :delayed
 end
 
 directory "/var/monit" do
