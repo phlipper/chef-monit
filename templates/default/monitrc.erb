@@ -1,5 +1,8 @@
 # Polling frequency
 set daemon <%= node["monit"]["polling_frequency"] %>
+<% if node["monit"]["start_delay"].to_i > 0 %>
+  with start delay <%= node["monit"]["start_delay"].to_i %>
+<% end -%>
 
 # Logging
 <% if node["monit"]["syslog"] == "true" %>
