@@ -51,6 +51,9 @@ This cookbook installs the monit components if not present, and pulls updates if
 ## Attributes
 
 ```ruby
+# Delay the start of polling when the service is started
+default["monit"]["start_delay"] = 0
+
 # How frequently the monit daemon polls for changes.
 default["monit"]["polling_frequency"] = 20
 
@@ -82,14 +85,14 @@ default["monit"]["mail"] = {
   :password => nil,
   :from     => "monit@$HOST",
   :subject  => "$SERVICE $EVENT at $DATE",
-  :message  => "Monit $ACTION $SERVICE at $DATE on $HOST,\n\nDutifully,\nMonit",
+  :message  => "Monit $ACTION $SERVICE at $DATE on $HOST,\n\n$DESCRIPTION\n\nDutifully,\nMonit",
   :tls      => nil,  # deprecated, use :security
   :security => nil,  # 'SSLV2'|'SSLV3'|'TLSV1'
   :timeout  => 30
 }
 
-case platform
-when "redhat", "centos", "fedora"
+case node["platform_family"]
+when "rhel", "fedora", "suse"
   default["monit"]["main_config_path"] = "/etc/monit.conf"
   default["monit"]["includes_dir"]     = "/etc/monit.d"
 else
