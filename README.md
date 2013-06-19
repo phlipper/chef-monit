@@ -129,6 +129,11 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
     * add `mail_alerts` attribute
 * **[@darron](https://github.com/darron)**
     * add descriptions to email notifications
+* **[@claco](https://github.com/claco)**
+    * add startup delay option to monit daemon config
+    * restart on default monitrc configs change
+    * restart monit service if the monit config changes
+    * fix platform family logic
 
 
 ## Contributing
