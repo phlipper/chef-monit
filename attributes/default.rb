@@ -8,6 +8,9 @@
 #
 
 
+# Delay the start of polling when the service is started
+default["monit"]["start_delay"] = 0
+
 # How frequently the monit daemon polls for changes.
 default["monit"]["polling_frequency"] = 20
 
