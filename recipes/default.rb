@@ -4,6 +4,7 @@
 #
 
 package "monit" do
+  version node["monit"]["version"]
   action :install
 end
 
