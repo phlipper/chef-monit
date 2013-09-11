@@ -3,10 +3,9 @@
 # Recipe:: default
 #
 
-package "monit" do
-  action :install
-end
+package "monit"
 
+# configuration file
 template node["monit"]["main_config_path"] do
   owner  "root"
   group  "root"
@@ -21,22 +20,14 @@ directory "/var/monit" do
   mode  "0700"
 end
 
-# enable startup
+# enable service startup
 execute "enable-monit-startup" do
   command "/bin/sed s/START=no/START=yes/ -i /etc/default/monit"
   not_if "grep 'START=yes' /etc/default/monit"
   only_if { platform_family?("debian") }
 end
 
-# build default monitrc files
-node["monit"]["default_monitrc_configs"].each do |conf|
-  monit_monitrc conf do
-    variables(:category => "system")
-
-    notifies :restart, "service[monit]", :delayed
-  end
-end
-
+# system service
 service "monit" do
   service_name "monit"
 
@@ -59,4 +50,12 @@ service "monit" do
   )
 
   action :enable
+end
+
+# build default monitrc files
+node["monit"]["default_monitrc_configs"].each do |conf|
+  monit_monitrc conf do
+    variables(:category => "system")
+    notifies :restart, "service[monit]", :delayed
+  end
 end
