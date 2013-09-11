@@ -23,11 +23,8 @@ set mailserver <%= node["monit"]["mail"]["hostname"] %> port <%= node["monit"]["
   <% if node["monit"]["mail"]["password"] -%>
   password "<%= node["monit"]["mail"]["password"] %>"
   <% end -%>
-<% if node["monit"]["mail"]["tls"] and node["monit"]["mail"]["security"].to_s.empty? -%>
-    using tlsv1
-<% end -%>
 <% if node["monit"]["mail"]["security"] -%>
-    using <%=  node["monit"]["mail"]["security"] %>
+    using <%= node["monit"]["mail"]["security"] %>
 <% end -%>
   with timeout <%= node["monit"]["mail"]["timeout"] %> seconds
 

@@ -86,7 +86,6 @@ default["monit"]["mail"] = {
   :from     => "monit@$HOST",
   :subject  => "$SERVICE $EVENT at $DATE",
   :message  => "Monit $ACTION $SERVICE at $DATE on $HOST,\n\n$DESCRIPTION\n\nDutifully,\nMonit",
-  :tls      => nil,  # deprecated, use :security
   :security => nil,  # 'SSLV2'|'SSLV3'|'TLSV1'
   :timeout  => 30
 }
