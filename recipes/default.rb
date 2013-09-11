@@ -21,12 +21,11 @@ directory "/var/monit" do
   mode  "0700"
 end
 
-if platform_family?("debian")
-  # enable startup
-  execute "enable-monit-startup" do
-    command "/bin/sed s/startup=0/startup=1/ -i /etc/default/monit"
-    not_if "grep 'startup=1' /etc/default/monit"
-  end
+# enable startup
+execute "enable-monit-startup" do
+  command "/bin/sed s/START=no/START=yes/ -i /etc/default/monit"
+  not_if "grep 'START=yes' /etc/default/monit"
+  only_if { platform_family?("debian") }
 end
 
 # build default monitrc files
