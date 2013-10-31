@@ -9,7 +9,7 @@ package "monit"
 template node["monit"]["main_config_path"] do
   owner  "root"
   group  "root"
-  mode   "0700"
+  mode   "0600"
   source "monitrc.erb"
   notifies :restart, "service[monit]", :delayed
 end
