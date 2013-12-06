@@ -36,8 +36,8 @@ set mail-format {
 
 <% if node["monit"]["web_interface"]["enable"] %>
 # Web interface
-set httpd port <%= node["monit"]["web_interface"]["port"] %> and
-  use address <%= node["monit"]["web_interface"]["address"] %>
+set httpd port <%= node["monit"]["web_interface"]["port"] %>
+  <% if node["monit"]["web_interface"]["address"] %>use address <%= node["monit"]["web_interface"]["address"] %><% end %>
   <% node["monit"]["web_interface"]["allow"].each do |allow| -%>
   allow <%= allow %>
   <% end %>
