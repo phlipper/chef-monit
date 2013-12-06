@@ -1,3 +1,7 @@
+def whyrun_supported?
+  true
+end
+
 action :create do
   t = template "#{node["monit"]["includes_dir"]}/#{new_resource.name}.monitrc" do
     owner "root"
