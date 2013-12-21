@@ -117,6 +117,7 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
     * update syntax to be Ruby 1.8-compatible
 * **[@dwradcliffe](https://github.com/dwradcliffe)**
     * typo fix for README
+    * fix logging logic
 * **[@tjwallace](https://github.com/tjwallace)**
     * load default monitrc configs from an attribute
 * **[@tomdz](https://github.com/tomdz)**
@@ -133,6 +134,8 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
     * restart on default monitrc configs change
     * restart monit service if the monit config changes
     * fix platform family logic
+* **[@maciejgalkiewicz](https://github.com/maciejgalkiewicz)**
+    * fix logging logic
 
 
 ## Contributing
