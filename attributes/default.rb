@@ -4,8 +4,6 @@
 #
 # Author:: Phil Cohen <github@phlippers.net>
 #
-# Copyright 2011-2012, Phil Cohen
-#
 
 
 # Delay the start of polling when the service is started
