@@ -27,7 +27,7 @@
         </ul>
       </header>
       <section>
-        <p><a href="http://travis-ci.org/phlipper/chef-monit"><img src="https://secure.travis-ci.org/phlipper/chef-monit.png" alt="Build Status"></a> <a href="https://codeclimate.com/github/phlipper/chef-monit"><img src="https://codeclimate.com/badge.png" alt="Code Climate"></a></p>
+        <p><a href="http://travis-ci.org/phlipper/chef-monit"><img src="http://img.shields.io/travis-ci/phlipper/chef-monit.png" alt="Build Status"></a></p>
 
 <h2>
 <a name="description" class="anchor" href="#description"><span class="octicon octicon-link"></span></a>Description</h2>
@@ -83,7 +83,10 @@
 <h2>
 <a name="attributes" class="anchor" href="#attributes"><span class="octicon octicon-link"></span></a>Attributes</h2>
 
-<div class="highlight highlight-ruby"><pre><span class="c1"># How frequently the monit daemon polls for changes.</span>
+<div class="highlight highlight-ruby"><pre><span class="c1"># Delay the start of polling when the service is started</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"start_delay"</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># How frequently the monit daemon polls for changes.</span>
 <span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"polling_frequency"</span><span class="o">]</span> <span class="o">=</span> <span class="mi">20</span>
 
 <span class="c1"># Use syslog for logging instead of a logfile.</span>
@@ -91,6 +94,9 @@
 
 <span class="c1"># If not using syslog, the log file that monit will use.</span>
 <span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"logfile"</span><span class="o">]</span>           <span class="o">=</span> <span class="s2">"/var/log/monit.log"</span>
+
+<span class="c1"># Enable emails for internal monit alerts</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"mail_alerts"</span><span class="o">]</span>       <span class="o">=</span> <span class="kp">true</span>
 
 <span class="c1"># Email address that will be notified of events.</span>
 <span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"alert_email"</span><span class="o">]</span>       <span class="o">=</span> <span class="s2">"root@localhost"</span>
@@ -111,13 +117,13 @@
   <span class="ss">:password</span> <span class="o">=&gt;</span> <span class="kp">nil</span><span class="p">,</span>
   <span class="ss">:from</span>     <span class="o">=&gt;</span> <span class="s2">"monit@$HOST"</span><span class="p">,</span>
   <span class="ss">:subject</span>  <span class="o">=&gt;</span> <span class="s2">"$SERVICE $EVENT at $DATE"</span><span class="p">,</span>
-  <span class="ss">:message</span>  <span class="o">=&gt;</span> <span class="s2">"Monit $ACTION $SERVICE at $DATE on $HOST,</span><span class="se">\n\n</span><span class="s2">Dutifully,</span><span class="se">\n</span><span class="s2">Monit"</span><span class="p">,</span>
-  <span class="ss">:tls</span>      <span class="o">=&gt;</span> <span class="kp">false</span><span class="p">,</span>
+  <span class="ss">:message</span>  <span class="o">=&gt;</span> <span class="s2">"Monit $ACTION $SERVICE at $DATE on $HOST,</span><span class="se">\n\n</span><span class="s2">$DESCRIPTION</span><span class="se">\n\n</span><span class="s2">Dutifully,</span><span class="se">\n</span><span class="s2">Monit"</span><span class="p">,</span>
+  <span class="ss">:security</span> <span class="o">=&gt;</span> <span class="kp">nil</span><span class="p">,</span>  <span class="c1"># 'SSLV2'|'SSLV3'|'TLSV1'</span>
   <span class="ss">:timeout</span>  <span class="o">=&gt;</span> <span class="mi">30</span>
 <span class="p">}</span>
 
-<span class="k">case</span> <span class="n">platform</span>
-<span class="k">when</span> <span class="s2">"redhat"</span><span class="p">,</span> <span class="s2">"centos"</span><span class="p">,</span> <span class="s2">"fedora"</span>
+<span class="k">case</span> <span class="n">node</span><span class="o">[</span><span class="s2">"platform_family"</span><span class="o">]</span>
+<span class="k">when</span> <span class="s2">"rhel"</span><span class="p">,</span> <span class="s2">"fedora"</span><span class="p">,</span> <span class="s2">"suse"</span>
   <span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"main_config_path"</span><span class="o">]</span> <span class="o">=</span> <span class="s2">"/etc/monit.conf"</span>
   <span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"includes_dir"</span><span class="o">]</span>     <span class="o">=</span> <span class="s2">"/etc/monit.d"</span>
 <span class="k">else</span>
@@ -162,6 +168,10 @@
 
 <ul>
 <li>typo fix for README</li>
+<li>fix logging logic</li>
+<li>whyrun support for monitrc provider</li>
+<li>support for reloading monit without restart</li>
+<li>don't render 'use address' if no address is provided</li>
 </ul>
 </li>
 <li>
@@ -179,6 +189,44 @@
 <li>add support for templates in different cookbooks</li>
 </ul>
 </li>
+<li>
+<strong><a href="https://github.com/alexism">@alexism</a></strong>
+
+<ul>
+<li>support other security protocols</li>
+</ul>
+</li>
+<li>
+<strong><a href="https://github.com/fixlr">@fixlr</a></strong>
+
+<ul>
+<li>add <code>mail_alerts</code> attribute</li>
+</ul>
+</li>
+<li>
+<strong><a href="https://github.com/darron">@darron</a></strong>
+
+<ul>
+<li>add descriptions to email notifications</li>
+</ul>
+</li>
+<li>
+<strong><a href="https://github.com/claco">@claco</a></strong>
+
+<ul>
+<li>add startup delay option to monit daemon config</li>
+<li>restart on default monitrc configs change</li>
+<li>restart monit service if the monit config changes</li>
+<li>fix platform family logic</li>
+</ul>
+</li>
+<li>
+<strong><a href="https://github.com/maciejgalkiewicz">@maciejgalkiewicz</a></strong>
+
+<ul>
+<li>fix logging logic</li>
+</ul>
+</li>
 </ul><h2>
 <a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h2>
 
@@ -194,11 +242,11 @@
 <p><strong>chef-monit</strong></p>
 
 <ul>
-<li>Freely distributable and licensed under the <a href="http://phlipper.mit-license.org/2011-2012/license.html">MIT license</a>.</li>
-<li>Copyright (c) 2011-2012 Phil Cohen (<a href="mailto:github@phlippers.net">github@phlippers.net</a>) <a href="http://coderwall.com/phlipper"><img src="http://api.coderwall.com/phlipper/endorsecount.png" alt="endorse"></a>
+<li>Freely distributable and licensed under the <a href="http://phlipper.mit-license.org/2011-2014/license.html">MIT license</a>.</li>
+<li>Copyright (c) 2011-2014 Phil Cohen (<a href="mailto:github@phlippers.net">github@phlippers.net</a>) <a href="http://coderwall.com/phlipper"><img src="http://api.coderwall.com/phlipper/endorsecount.png" alt="endorse"></a>  <a href="https://www.gittip.com/phlipper/"><img src="http://img.shields.io/gittip/phlipper.png" alt="Gittip"></a>
 </li>
 <li><a href="http://phlippers.net/">http://phlippers.net/</a></li>
-</ul>
+</ul><p><a href="https://bitdeli.com/free" title="Bitdeli Badge"><img src="https://d2weczhvl823v0.cloudfront.net/phlipper/chef-monit/trend.png" alt="Bitdeli Badge"></a></p>
       </section>
     </div>
     <footer>
