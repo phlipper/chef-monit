@@ -120,6 +120,7 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
     * fix logging logic
     * whyrun support for monitrc provider
     * support for reloading monit without restart
+    * don't render 'use address' if no address is provided
 * **[@tjwallace](https://github.com/tjwallace)**
     * load default monitrc configs from an attribute
 * **[@tomdz](https://github.com/tomdz)**
