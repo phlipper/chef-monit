@@ -118,6 +118,7 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
 * **[@dwradcliffe](https://github.com/dwradcliffe)**
     * typo fix for README
     * fix logging logic
+    * whyrun support for monitrc provider
 * **[@tjwallace](https://github.com/tjwallace)**
     * load default monitrc configs from an attribute
 * **[@tomdz](https://github.com/tomdz)**
