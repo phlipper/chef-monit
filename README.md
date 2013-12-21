@@ -1,4 +1,4 @@
-# chef-monit  [![Build Status](https://secure.travis-ci.org/phlipper/chef-monit.png)](http://travis-ci.org/phlipper/chef-monit) [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/phlipper/chef-monit)
+# chef-monit  [![Build Status](http://img.shields.io/travis-ci/phlipper/chef-monit.png)](http://travis-ci.org/phlipper/chef-monit)
 
 ## Description
 
