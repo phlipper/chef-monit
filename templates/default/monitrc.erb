@@ -7,7 +7,7 @@ set daemon <%= node["monit"]["polling_frequency"] %>
 # Logging
 <% if node["monit"]["use_syslog"] %>
 set logfile syslog facility log_daemon
-<% else %>
+<% elsif node["monit"]["logfile"] %>
 set logfile <%= node["monit"]["logfile"] %>
 <% end %>
 
