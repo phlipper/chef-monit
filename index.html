@@ -29,13 +29,16 @@
       <section>
         <p><a href="http://travis-ci.org/phlipper/chef-monit"><img src="https://secure.travis-ci.org/phlipper/chef-monit.png" alt="Build Status"></a> <a href="https://codeclimate.com/github/phlipper/chef-monit"><img src="https://codeclimate.com/badge.png" alt="Code Climate"></a></p>
 
-<h2>Description</h2>
+<h2>
+<a name="description" class="anchor" href="#description"><span class="octicon octicon-link"></span></a>Description</h2>
 
 <p>Installs the <code>monit</code> package from (<a href="http://mmonit.com/monit/">http://mmonit.com/monit/</a>).</p>
 
-<h2>Requirements</h2>
+<h2>
+<a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a>Requirements</h2>
 
-<h3>Supported Platforms</h3>
+<h3>
+<a name="supported-platforms" class="anchor" href="#supported-platforms"><span class="octicon octicon-link"></span></a>Supported Platforms</h3>
 
 <p>The following platforms are supported by this cookbook, meaning that the recipes run on these platforms without error:</p>
 
@@ -48,18 +51,22 @@
 <li>Fedora</li>
 <li>SUSE</li>
 <li>Amazon</li>
-</ul><h2>Recipes</h2>
+</ul><h2>
+<a name="recipes" class="anchor" href="#recipes"><span class="octicon octicon-link"></span></a>Recipes</h2>
 
 <ul>
 <li>
 <code>monit</code> - The default recipe. Sets up the service definition and default checks.</li>
-</ul><h2>Resources</h2>
+</ul><h2>
+<a name="resources" class="anchor" href="#resources"><span class="octicon octicon-link"></span></a>Resources</h2>
 
-<h3><code>monit_monitrc</code></h3>
+<h3>
+<a name="monit_monitrc" class="anchor" href="#monit_monitrc"><span class="octicon octicon-link"></span></a><code>monit_monitrc</code>
+</h3>
 
 <p>The following will create a monitrc configuration:</p>
 
-<div class="highlight"><pre><span class="n">monit_monitrc</span> <span class="s2">"ssh"</span> <span class="k">do</span>
+<div class="highlight highlight-ruby"><pre><span class="n">monit_monitrc</span> <span class="s2">"ssh"</span> <span class="k">do</span>
   <span class="n">variables</span><span class="p">({</span> <span class="ss">category</span><span class="p">:</span> <span class="s2">"system"</span> <span class="p">})</span>
 <span class="k">end</span>
 </pre></div>
@@ -68,13 +75,15 @@
 
 <p>The <code>variables</code> option within the block is optional, and can contain a list of key-value pairs to assign within your template.</p>
 
-<h2>Usage</h2>
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
 
 <p>This cookbook installs the monit components if not present, and pulls updates if they are installed on the system.</p>
 
-<h2>Attributes</h2>
+<h2>
+<a name="attributes" class="anchor" href="#attributes"><span class="octicon octicon-link"></span></a>Attributes</h2>
 
-<div class="highlight"><pre><span class="c1"># How frequently the monit daemon polls for changes.</span>
+<div class="highlight highlight-ruby"><pre><span class="c1"># How frequently the monit daemon polls for changes.</span>
 <span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"polling_frequency"</span><span class="o">]</span> <span class="o">=</span> <span class="mi">20</span>
 
 <span class="c1"># Use syslog for logging instead of a logfile.</span>
@@ -121,7 +130,8 @@
 <span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"default_monitrc_configs"</span><span class="o">]</span> <span class="o">=</span> <span class="o">[</span><span class="s2">"load"</span><span class="p">,</span> <span class="s2">"ssh"</span><span class="o">]</span>
 </pre></div>
 
-<h2>Contributors</h2>
+<h2>
+<a name="contributors" class="anchor" href="#contributors"><span class="octicon octicon-link"></span></a>Contributors</h2>
 
 <p>Many thanks go to the following <a href="https://github.com/phlipper/chef-monit/graphs/contributors">contributors</a> who have helped to make this cookbook even better:</p>
 
@@ -169,7 +179,8 @@
 <li>add support for templates in different cookbooks</li>
 </ul>
 </li>
-</ul><h2>Contributing</h2>
+</ul><h2>
+<a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h2>
 
 <ol>
 <li>Fork it</li>
@@ -177,7 +188,8 @@
 <li>Commit your changes (<code>git commit -am 'Added some feature'</code>)</li>
 <li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
 <li>Create new Pull Request</li>
-</ol><h2>License</h2>
+</ol><h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
 
 <p><strong>chef-monit</strong></p>
 
