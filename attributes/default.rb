@@ -21,6 +21,10 @@ default["monit"]["logfile"]           = "/var/log/monit.log"
 # Enable emails for internal monit alerts
 default["monit"]["mail_alerts"]       = true
 
+# Ignore alerts for specific events
+# Possible events include: action, checksum, connection, content, data, exec, fsflags, gid, icmp, instance, invalid, nonexist, permission, pid, ppid, resource, size, status, timeout, timestamp, uid, uptime.
+default["monit"]["alert_ignore_events"] = []
+
 # Email address that will be notified of events.
 default["monit"]["alert_email"]       = "root@localhost"
 
