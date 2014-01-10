@@ -143,6 +143,8 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
     * fix platform family logic
 * **[@maciejgalkiewicz](https://github.com/maciejgalkiewicz)**
     * fix logging logic
+* **[@pauloricardomg](https://github.com/pauloricardomg)**
+    * add `alert_ignore_events` attribute
 
 
 ## Contributing
