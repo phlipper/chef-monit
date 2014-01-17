@@ -10,10 +10,7 @@ action :create do
     source new_resource.template_source || "#{new_resource.name}.monitrc.erb"
     cookbook new_resource.template_cookbook
     variables new_resource.variables
-    action :create
-    if node["monit"]["reload_on_change"]
-        notifies :reload, "service[monit]", :delayed
-    end
+    notifies :reload, "service[monit]" if node["monit"]["reload_on_change"]
   end
 
   new_resource.updated_by_last_action(t.updated_by_last_action?)
