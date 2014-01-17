@@ -5,3 +5,6 @@ vendor/bundle
 .DS_Store
 build/*
 tmp/
+Gemfile.lock
+test/support/chef-10.gemfile.lock
+test/support/chef-11.gemfile.lock
