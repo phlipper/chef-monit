@@ -147,6 +147,7 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
     * fix logging logic
 * **[@pauloricardomg](https://github.com/pauloricardomg)**
     * add `alert_ignore_events` attribute
+    * add `reload_on_change` attribute
 
 
 ## Contributing
