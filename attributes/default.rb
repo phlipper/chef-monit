@@ -61,3 +61,6 @@ end
 # The monit::default recipe will load these monit_monitrc resources automatically
 # NOTE setting this attribute at the default level will append values to the array
 default["monit"]["default_monitrc_configs"] = ["load", "ssh"]
+
+# Whether the monit service should be reloaded when a configuration changes
+default["monit"]["reload_on_change"] = true

@@ -11,7 +11,9 @@ template node["monit"]["main_config_path"] do
   group  "root"
   mode   "0600"
   source "monitrc.erb"
-  notifies :reload, "service[monit]", :delayed
+  if node["monit"]["reload_on_change"]
+      notifies :reload, "service[monit]", :delayed
+  end
 end
 
 directory "/var/monit" do
