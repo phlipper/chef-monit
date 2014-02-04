@@ -5,6 +5,17 @@
 
 package "monit"
 
+# optionally use encrypted mail credentials
+if smtp_provider = node["monit"]["mail"]["encrypted_credentials"]
+  bag_name = node["monit"]["mail"]["encrypted_credentials_data_bag"]
+  credentials = Chef::EncryptedDataBagItem.load(bag_name, smtp_provider)
+
+  node.default["monit"]["mail"]["username"] = credentials["username"]
+  node.default["monit"]["mail"]["password"] = credentials["password"]
+
+  Chef::Log.info "Using encrpyted mail credentials: #{smtp_provider}"
+end
+
 # configuration file
 template node["monit"]["main_config_path"] do
   owner  "root"
