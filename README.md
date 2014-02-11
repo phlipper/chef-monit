@@ -82,11 +82,16 @@ default["monit"]["web_interface"] = {
 }
 
 # Email settings that will be used for notification of events.
+#
+# NOTE: Populate the `encrypted_credentials` option if you want to set the
+# `username` and `password` for your stmp provider using an encrypted data bag.
 default["monit"]["mail"] = {
   :hostname => "localhost",
   :port     => 25,
   :username => nil,
   :password => nil,
+  :encrypted_credentials => nil, # data bag item with stmp provider creds
+  :encrypted_credentials_data_bag => 'credentials',
   :from     => "monit@$HOST",
   :subject  => "$SERVICE $EVENT at $DATE",
   :message  => "Monit $ACTION $SERVICE at $DATE on $HOST,\n\n$DESCRIPTION\n\nDutifully,\nMonit",
