@@ -22,8 +22,9 @@ end
 
 # enable service startup
 execute "enable-monit-startup" do
-  command "/bin/sed s/START=no/START=yes/ -i /etc/default/monit"
-  not_if "grep 'START=yes' /etc/default/monit"
+  command "/bin/sed -e s/startup=0/startup=1/ -e s/START=no/START=yes/ \
+          -i /etc/default/monit"
+  not_if "grep -e 'startup=1' -e 'START=yes' /etc/default/monit"
   only_if { platform_family?("debian") }
 end
 
