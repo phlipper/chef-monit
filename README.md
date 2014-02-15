@@ -155,6 +155,8 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
     * add `reload_on_change` attribute
 * **[@drywheat](https://github.com/drywheat)**
     * support encrypted data bag for smtp credentials
+* **[@esigler](https://github.com/esigler)**
+    * allow either style of monit startup flag to work
 
 
 ## Contributing
