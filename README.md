@@ -153,6 +153,8 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
 * **[@pauloricardomg](https://github.com/pauloricardomg)**
     * add `alert_ignore_events` attribute
     * add `reload_on_change` attribute
+* **[@drywheat](https://github.com/drywheat)**
+    * support encrypted data bag for smtp credentials
 
 
 ## Contributing
