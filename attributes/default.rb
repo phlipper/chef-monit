@@ -71,3 +71,15 @@ default["monit"]["default_monitrc_configs"] = %w[load ssh]
 
 # Whether the monit service should be reloaded when a configuration changes
 default["monit"]["reload_on_change"] = true
+
+# source install specifics
+default['monit']['source_install'] = false
+
+default['monit']['source']['version'] = '5.7'
+default['monit']['source']['prefix'] = '/usr/local'
+default['monit']['source']['url'] = 'https://mmonit.com/monit/dist/monit-5.7.tar.gz'
+default['monit']['source']['checksum'] = 'bb250ab011d805b5693972afdf95509e79bb3b390caa763275c9501f74b598a2'
+default['monit']['source']['pam_support'] = true
+default['monit']['source']['ssl_support'] = true
+default['monit']['source']['large_file_support'] = true
+default['monit']['source']['compiler_optimized'] = true

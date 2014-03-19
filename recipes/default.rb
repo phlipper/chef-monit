@@ -3,7 +3,11 @@
 # Recipe:: default
 #
 
-package "monit"
+if node['monit']['source_install']
+  include_recipe 'monit::_install_source'
+else
+  package 'monit'
+end
 
 # optionally use encrypted mail credentials
 encrypted_credentials = node["monit"]["mail"]["encrypted_credentials"]
