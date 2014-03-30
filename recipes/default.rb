@@ -37,12 +37,13 @@ execute "enable-monit-startup" do
           -i /etc/default/monit"
   not_if "grep -e 'startup=1' -e 'START=yes' /etc/default/monit"
   only_if { platform_family?("debian") }
+  notifies :restart, "service[monit]"
 end
 
 # system service
 service "monit" do
   supports restart: true, start: true, reload: true
-  action :enable
+  action [:enable, :start]
 
   case node["platform_family"]
   when "rhel", "fedora", "suse"
