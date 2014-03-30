@@ -157,6 +157,8 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
     * support encrypted data bag for smtp credentials
 * **[@esigler](https://github.com/esigler)**
     * allow either style of monit startup flag to work
+* **[@evan2645](https://github.com/evan2645)**
+    * fix bug in which monit is not started during bootstrap
 
 
 ## Contributing
