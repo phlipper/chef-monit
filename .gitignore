@@ -8,3 +8,5 @@ tmp/
 Gemfile.lock
 test/support/chef-10.gemfile.lock
 test/support/chef-11.gemfile.lock
+.kitchen/
+.kitchen.local.yml
