@@ -44,9 +44,10 @@ end
   end
 end
 
-cookbook_file node['monit']['main_config_path'] do
-  source 'monit-config'
+template node['monit']['main_config_path'] do
   mode '0600'
+  source 'monitrc.erb'
+  notifies :reload, 'service[monit]' if node['monit']['reload_on_change']
 end
 
 cookbook_file '/etc/default/monit' do
