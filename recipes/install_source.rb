@@ -46,7 +46,7 @@ end
 
 cookbook_file node['monit']['main_config_path'] do
   source 'monit-config'
-  mode 0600
+  mode '0600'
 end
 
 cookbook_file '/etc/default/monit' do
@@ -55,7 +55,7 @@ end
 
 template '/etc/init.d/monit' do
   source 'monit.init.erb'
-  mode 0755
+  mode '0755'
   variables(
     prefix: node['monit']['source']['prefix'],
     config: node['monit']['main_config_path']
