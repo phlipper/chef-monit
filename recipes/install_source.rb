@@ -64,5 +64,5 @@ template '/etc/init.d/monit' do
 end
 
 service 'monit' do
-  action :start
+  action [:enable, :start]
 end
