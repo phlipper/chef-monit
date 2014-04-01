@@ -67,6 +67,11 @@ default["monit"]["default_monitrc_configs"] = ["load", "ssh"]
 # Whether the monit service should be reloaded when a configuration changes
 default["monit"]["reload_on_change"] = true
 
+# specify a particular version of the monit package you want installed,
+# otherwise it will install the default. this value is ignored when performing a
+# source install.
+default['monit']['version'] = nil
+
 # source install specifics
 default['monit']['source_install'] = false
 

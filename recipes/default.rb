@@ -6,7 +6,9 @@
 if node['monit']['source_install']
   include_recipe 'monit::_install_source'
 else
-  package 'monit'
+  package 'monit' do
+    version node['monit']['version'] if node['monit']['version']
+  end
 end
 
 # optionally use encrypted mail credentials
