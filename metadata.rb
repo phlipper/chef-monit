@@ -7,6 +7,7 @@ long_description  "Please refer to README.md"
 version           "1.5.2"
 
 recipe "monit", "Sets up the service definition and default checks."
+recipe "monit::install_source", "Compiles and installs monit from source."
 
 supports "ubuntu"
 supports "debian"

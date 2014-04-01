@@ -4,7 +4,7 @@
 #
 
 if node['monit']['source_install']
-  include_recipe 'monit::_install_source'
+  include_recipe 'monit::install_source'
 else
   package 'monit' do
     version node['monit']['version'] if node['monit']['version']

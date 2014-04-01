@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: monit
-# Recipe:: _install_source
+# Recipe:: install_source
 #
 # Emulate a package install using src code
 #
