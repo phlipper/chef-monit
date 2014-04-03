@@ -21,6 +21,9 @@ default["monit"]["logfile"]           = "/var/log/monit.log"
 # Where Monit stores unique Monit instance id
 default["monit"]["idfile"]            = "/var/.monit.id"
 
+# Where Monit stores Monit state file
+default["monit"]["statefile"]            = "/var/lib/monit/state"
+
 # Enable emails for internal monit alerts
 default["monit"]["mail_alerts"]       = true
 
