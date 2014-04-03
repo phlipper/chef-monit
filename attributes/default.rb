@@ -18,6 +18,9 @@ default["monit"]["use_syslog"]        = true
 # If not using syslog, the log file that monit will use.
 default["monit"]["logfile"]           = "/var/log/monit.log"
 
+# Where Monit stores unique Monit instance id
+default["monit"]["idfile"]            = "/var/.monit.id"
+
 # Enable emails for internal monit alerts
 default["monit"]["mail_alerts"]       = true
 
