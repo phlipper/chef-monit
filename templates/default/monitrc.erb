@@ -16,6 +16,11 @@ set logfile <%= node["monit"]["logfile"] %>
 set idfile <%= node["monit"]["idfile"] %>
 <% end %>
 
+# Set location of Monit state file
+<% if node["monit"]["statefile"] %>
+set idfile <%= node["monit"]["statefile"] %>
+<% end %>
+
 <% if node['monit']['mail_alerts'] %>
 # Mail alerts
 set alert <%= node["monit"]["alert_email"] %> <%= node["monit"]["alert_ignore_events"].empty? ? "" : "but not on { #{node["monit"]["alert_ignore_events"].join(", ")} }" %>
