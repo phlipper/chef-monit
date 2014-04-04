@@ -6,14 +6,15 @@
 package "monit"
 
 # optionally use encrypted mail credentials
-if smtp_provider = node["monit"]["mail"]["encrypted_credentials"]
+encrypted_credentials = node["monit"]["mail"]["encrypted_credentials"]
+if encrypted_credentials
   bag_name = node["monit"]["mail"]["encrypted_credentials_data_bag"]
-  credentials = Chef::EncryptedDataBagItem.load(bag_name, smtp_provider)
+  credentials = Chef::EncryptedDataBagItem.load(bag_name, encrypted_credentials)
 
   node.default["monit"]["mail"]["username"] = credentials["username"]
   node.default["monit"]["mail"]["password"] = credentials["password"]
 
-  Chef::Log.info "Using encrpyted mail credentials: #{smtp_provider}"
+  Chef::Log.info "Using encrpyted mail credentials: #{encrypted_credentials}"
 end
 
 # configuration file
@@ -61,6 +62,6 @@ end
 node["monit"]["default_monitrc_configs"].each do |conf|
   monit_monitrc conf do
     variables(category: "system")
-    notifies :reload, "service[monit]", :delayed
+    notifies :reload, "service[monit]"
   end
 end
