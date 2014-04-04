@@ -63,6 +63,12 @@ default["monit"]["use_syslog"] = true
 # If not using syslog, the log file that monit will use.
 default["monit"]["logfile"] = "/var/log/monit.log"
 
+# Where Monit stores unique Monit instance id
+default["monit"]["idfile"]            = "/var/.monit.id"
+
+# Where Monit stores Monit state file
+default["monit"]["statefile"]         = "/var/lib/monit/state"
+
 # Enable emails for internal monit alerts
 default["monit"]["mail_alerts"] = true
 
@@ -156,6 +162,8 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
     * allow either style of monit startup flag to work
 * **[@evan2645](https://github.com/evan2645)**
     * fix bug in which monit is not started during bootstrap
+* **[@mvdkleijn](https://github.com/mvdkleijn)**
+    * add settings for idfile and statefile
 
 
 ## Contributing
