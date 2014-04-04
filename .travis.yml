@@ -1,8 +1,10 @@
 language: ruby
-gemfile:
-   - test/support/chef-10.gemfile
-   - test/support/chef-11.gemfile
 rvm:
   - 1.9.3
   - 2.0.0
-script: "bundle exec rake"
+  - 2.1.1
+script: bundle exec rake
+env:
+  matrix:
+  - CHEF_VERSION: "10.30"
+  - CHEF_VERSION: "11.10"
