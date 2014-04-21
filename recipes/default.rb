@@ -3,7 +3,15 @@
 # Recipe:: default
 #
 
-package "monit"
+if node["monit"]["source_install"]
+  include_recipe "monit::install_source"
+else
+  include_recipe "yum-epel" if platform_family?("rhel") # ~FC007 uses `suggests`
+
+  package "monit" do
+    version node["monit"]["version"] if node["monit"]["version"]
+  end
+end
 
 # optionally use encrypted mail credentials
 encrypted_credentials = node["monit"]["mail"]["encrypted_credentials"]
@@ -33,11 +41,14 @@ directory "/var/monit" do
 end
 
 # enable service startup
-execute "enable-monit-startup" do
-  command "/bin/sed -e s/startup=0/startup=1/ -e s/START=no/START=yes/ \
-          -i /etc/default/monit"
-  not_if "grep -e 'startup=1' -e 'START=yes' /etc/default/monit"
-  only_if { platform_family?("debian") }
+file "/etc/default/monit" do
+  owner "root"
+  group "root"
+  mode "0644"
+  content [
+    "START=yes",
+    "MONIT_OPTS=#{node["monit"]["init_opts"]}"
+  ].join("\n")
   notifies :restart, "service[monit]"
 end
 
@@ -46,14 +57,13 @@ service "monit" do
   supports restart: true, start: true, reload: true
   action [:enable, :start]
 
-  case node["platform_family"]
-  when "rhel", "fedora", "suse"
-    start_command   "/sbin/service monit start"
-    restart_command "/sbin/service monit restart"
-    reload_command  "monit reload"
-  when "debian"
+  if platform?("debian")
     start_command   "/usr/sbin/invoke-rc.d monit start"
     restart_command "/usr/sbin/invoke-rc.d monit restart"
+    reload_command  "monit reload"
+  else
+    start_command   "service monit start"
+    restart_command "service monit restart"
     reload_command  "monit reload"
   end
 end

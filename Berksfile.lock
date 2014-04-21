@@ -1,0 +1,15 @@
+DEPENDENCIES
+  apt
+  monit
+    path: .
+    metadata: true
+  yum-epel
+
+GRAPH
+  apt (2.3.8)
+  build-essential (2.0.0)
+  monit (1.5.2)
+    build-essential (>= 0.0.0)
+  yum (3.2.0)
+  yum-epel (0.3.6)
+    yum (~> 3.0)
