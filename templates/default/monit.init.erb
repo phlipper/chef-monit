@@ -18,7 +18,8 @@
 
 set -e
 
-. /lib/lsb/init-functions
+[ -f /lib/lsb/init-functions ] && . /lib/lsb/init-functions
+[ -f /etc/rc.d/init.d/functions ] && . /etc/rc.d/init.d/functions
 
 DAEMON="<%= @prefix %>/bin/monit"
 CONFIG="<%= @config %>"

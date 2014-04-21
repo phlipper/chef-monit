@@ -9,6 +9,10 @@ version           "1.5.2"
 recipe "monit", "Sets up the service definition and default checks."
 recipe "monit::install_source", "Compiles and installs monit from source."
 
+depends "build-essential"
+suggests "apt"
+suggests "yum-epel"
+
 supports "ubuntu"
 supports "debian"
 supports "redhat"

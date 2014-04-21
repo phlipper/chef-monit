@@ -6,6 +6,8 @@
 if node["monit"]["source_install"]
   include_recipe "monit::install_source"
 else
+  include_recipe "yum-epel" if platform_family?("rhel") # ~FC007 uses `suggests`
+
   package "monit" do
     version node["monit"]["version"] if node["monit"]["version"]
   end
@@ -55,14 +57,13 @@ service "monit" do
   supports restart: true, start: true, reload: true
   action [:enable, :start]
 
-  case node["platform_family"]
-  when "rhel", "fedora", "suse"
-    start_command   "/sbin/service monit start"
-    restart_command "/sbin/service monit restart"
-    reload_command  "monit reload"
-  when "debian"
+  if platform?("debian")
     start_command   "/usr/sbin/invoke-rc.d monit start"
     restart_command "/usr/sbin/invoke-rc.d monit restart"
+    reload_command  "monit reload"
+  else
+    start_command   "service monit start"
+    restart_command "service monit restart"
     reload_command  "monit reload"
   end
 end
