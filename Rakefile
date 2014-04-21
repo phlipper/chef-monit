@@ -3,7 +3,7 @@
 task default: "test"
 
 desc "Run all tests"
-task test: [:knife, :rubocop, :foodcritic]
+task test: [:knife, :rubocop, :foodcritic, :kitchen]
 
 desc "Runs foodcritic linter"
 task foodcritic: :prepare_sandbox do
@@ -18,6 +18,16 @@ end
 desc "Runs RuboCop style checks"
 task rubocop: :prepare_sandbox do
   sh "bundle exec rubocop #{sandbox_path}"
+end
+
+desc "Runs integration tests with test kitchen"
+task :kitchen do
+  if ENV["CI"]
+    puts "Skipping Kitchen tests for now due to CI environment..."
+    exit
+  end
+  args = ENV["CI"] ? "test --destroy=always" : "verify"
+  sh "bundle exec kitchen #{args}"
 end
 
 task :prepare_sandbox do
