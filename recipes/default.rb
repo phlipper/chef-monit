@@ -39,11 +39,14 @@ directory "/var/monit" do
 end
 
 # enable service startup
-execute "enable-monit-startup" do
-  command "/bin/sed -e s/startup=0/startup=1/ -e s/START=no/START=yes/ \
-          -i /etc/default/monit"
-  not_if "grep -e 'startup=1' -e 'START=yes' /etc/default/monit"
-  only_if { platform_family?("debian") }
+file "/etc/default/monit" do
+  owner "root"
+  group "root"
+  mode "0644"
+  content [
+    "START=yes",
+    "MONIT_OPTS=#{node["monit"]["init_opts"]}"
+  ].join("\n")
   notifies :restart, "service[monit]"
 end
 
