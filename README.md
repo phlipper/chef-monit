@@ -155,6 +155,7 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
     * whyrun support for monitrc provider
     * support for reloading monit without restart
     * don't render 'use address' if no address is provided
+    * fix attribute comments
 * **[@tjwallace](https://github.com/tjwallace)**
     * load default monitrc configs from an attribute
 * **[@tomdz](https://github.com/tomdz)**
