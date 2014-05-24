@@ -186,6 +186,8 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
     * fix bug in which monit is not started during bootstrap
 * **[@mvdkleijn](https://github.com/mvdkleijn)**
     * add settings for idfile and statefile
+* **[@mbanton](https://github.com/mbanton)**
+    * fix `statefile` attribute in `monitrc` template
 
 
 ## Contributing
