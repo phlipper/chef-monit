@@ -18,7 +18,7 @@ set idfile <%= node["monit"]["idfile"] %>
 
 # Set location of Monit state file
 <% if node["monit"]["statefile"] %>
-set idfile <%= node["monit"]["statefile"] %>
+set statefile <%= node["monit"]["statefile"] %>
 <% end %>
 
 <% if node['monit']['mail_alerts'] %>
