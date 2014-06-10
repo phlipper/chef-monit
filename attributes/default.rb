@@ -82,6 +82,7 @@ default["monit"]["version"] = nil
 
 # source install specifics
 default["monit"]["source_install"] = false
+default["monit"]["source_uninstall"] = false
 
 default["monit"]["source"]["version"] = "5.7"
 default["monit"]["source"]["prefix"] = "/usr/local"
@@ -94,6 +95,7 @@ default["monit"]["source"]["compiler_optimized"] = true
 
 # binary install specifics
 default["monit"]["binary_install"] = false
+default["monit"]["binary_uninstall"] = false
 
 default["monit"]["binary"]["version"] = "5.8.1"
 default["monit"]["binary"]["prefix"] = "/usr"
