@@ -1,4 +1,4 @@
-tar_file = "monit-#{node["monit"]["version"]}.tar.gz"
+tar_file = "monit-#{node["monit"]["binary"]["version"]}.tar.gz"
 
 remote_file "#{Chef::Config[:file_cache_path]}/#{tar_file}" do
   source node["monit"]["binary"]["url"]
@@ -17,8 +17,8 @@ end
 
 execute "install-monit-binary" do
   command "cd #{Chef::Config[:file_cache_path]} && \
-  tar zxvf monit-#{node["monit"]["version"]}.tar.gz && \
-  cd monit-#{node["monit"]["version"]} && \
+  tar zxvf monit-#{node["monit"]["binary"]["version"]}.tar.gz && \
+  cd monit-#{node["monit"]["binary"]["version"]} && \
   cp bin/monit #{node["monit"]["binary"]["prefix"]}/bin/monit"
 end
 
