@@ -7,19 +7,20 @@ remote_file "#{Chef::Config[:file_cache_path]}/#{tar_file}" do
   notifies :run, "execute[install-monit-binary]"
 end
 
+execute "install-monit-binary" do
+  command "cd #{Chef::Config[:file_cache_path]} && \
+  tar zxvf monit-#{node["monit"]["binary"]["version"]}.tar.gz && \
+  cd monit-#{node["monit"]["binary"]["version"]} && \
+  cp bin/monit #{node["monit"]["binary"]["prefix"]}/bin/monit"
+  action :nothing
+end
+
 config_dir = File.dirname(node["monit"]["main_config_path"])
 
 [config_dir, node["monit"]["includes_dir"]].each do |dir|
   directory dir do
     recursive true
   end
-end
-
-execute "install-monit-binary" do
-  command "cd #{Chef::Config[:file_cache_path]} && \
-  tar zxvf monit-#{node["monit"]["binary"]["version"]}.tar.gz && \
-  cd monit-#{node["monit"]["binary"]["version"]} && \
-  cp bin/monit #{node["monit"]["binary"]["prefix"]}/bin/monit"
 end
 
 template "/etc/init.d/monit" do
