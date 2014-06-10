@@ -5,6 +5,8 @@
 
 if node["monit"]["source_install"]
   include_recipe "monit::install_source"
+elsif node["monit"]["binary_install"]
+  include_recipe "monit::install_binary"
 else
   include_recipe "yum-epel" if platform_family?("rhel") # ~FC007 uses `suggests`
 
