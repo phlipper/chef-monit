@@ -70,10 +70,10 @@ service "monit" do
   if platform?("debian")
     start_command   "/usr/sbin/invoke-rc.d monit start"
     restart_command "/usr/sbin/invoke-rc.d monit restart"
-    reload_command  "monit reload"
+    reload_command  "/etc/init.d/monit reload"
   else
     start_command   "service monit start"
     restart_command "service monit restart"
-    reload_command  "monit reload"
+    reload_command  "service monit reload"
   end
 end
