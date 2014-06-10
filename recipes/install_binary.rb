@@ -7,8 +7,12 @@ remote_file "#{Chef::Config[:file_cache_path]}/#{tar_file}" do
   notifies :run, "execute[install-monit-binary]"
 end
 
-directory File.dirname(node["monit"]["main_config_path"]) do
-  recursive true
+config_dir = File.dirname(node["monit"]["main_config_path"])
+
+[config_dir, node["monit"]["includes_dir"]].each do |dir|
+  directory dir do
+    recursive true
+  end
 end
 
 execute "install-monit-binary" do
