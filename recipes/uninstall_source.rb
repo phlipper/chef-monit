@@ -8,7 +8,7 @@
 binary = "#{node["monit"]["source"]["prefix"]}/bin/monit"
 
 execute "rm #{binary}" do
-  only_if { File.exists?(binary) }
+  only_if { File.exist?(binary) }
 end
 
 directory "/var/lib/monit" do

@@ -25,13 +25,23 @@ if encrypted_credentials
   Chef::Log.info "Using encrpyted mail credentials: #{encrypted_credentials}"
 end
 
+should_reload = node["monit"]["reload_on_change"]
+
 # configuration file
 template node["monit"]["main_config_path"] do
   owner  "root"
   group  "root"
   mode   "0600"
   source "monitrc.erb"
-  notifies :reload, "service[monit]" if node["monit"]["reload_on_change"]
+  notifies :reload, "service[monit]", :delayed if should_reload
+end
+
+# build default monitrc files
+node["monit"]["default_monitrc_configs"].each do |conf|
+  monit_monitrc conf do
+    variables(category: "system")
+    notifies :reload, "service[monit]", :delayed
+  end
 end
 
 directory "/var/monit" do
@@ -49,7 +59,7 @@ file "/etc/default/monit" do
     "START=yes",
     "MONIT_OPTS=#{node["monit"]["init_opts"]}"
   ].join("\n")
-  notifies :restart, "service[monit]"
+  notifies :restart, "service[monit]", :delayed
 end
 
 # system service
@@ -65,13 +75,5 @@ service "monit" do
     start_command   "service monit start"
     restart_command "service monit restart"
     reload_command  "monit reload"
-  end
-end
-
-# build default monitrc files
-node["monit"]["default_monitrc_configs"].each do |conf|
-  monit_monitrc conf do
-    variables(category: "system")
-    notifies :reload, "service[monit]"
   end
 end
