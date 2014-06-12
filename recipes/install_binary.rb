@@ -17,7 +17,7 @@ end
 
 config_dir = File.dirname(node["monit"]["main_config_path"])
 
-[config_dir, node["monit"]["includes_dir"]].each do |dir|
+[config_dir, node["monit"]["includes_dir"], "/var/lib/monit"].each do |dir|
   directory dir do
     recursive true
   end
