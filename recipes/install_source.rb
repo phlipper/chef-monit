@@ -5,7 +5,6 @@
 # Emulate a package install using src code
 #
 
-include_recipe "apt" if platform_family?("debian")  # ~FC007 uses `suggests`
 include_recipe "build-essential"
 
 source_opts = node["monit"]["source"]
