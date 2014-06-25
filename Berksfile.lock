@@ -6,10 +6,10 @@ DEPENDENCIES
   yum-epel
 
 GRAPH
-  apt (2.3.8)
-  build-essential (2.0.0)
-  monit (1.5.2)
+  apt (2.4.0)
+  build-essential (2.0.4)
+  monit (1.5.3)
     build-essential (>= 0.0.0)
-  yum (3.2.0)
+  yum (3.2.2)
   yum-epel (0.3.6)
     yum (~> 3.0)
