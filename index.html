@@ -90,50 +90,85 @@
 <span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"polling_frequency"</span><span class="o">]</span> <span class="o">=</span> <span class="mi">20</span>
 
 <span class="c1"># Use syslog for logging instead of a logfile.</span>
-<span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"use_syslog"</span><span class="o">]</span>        <span class="o">=</span> <span class="kp">true</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"use_syslog"</span><span class="o">]</span> <span class="o">=</span> <span class="kp">true</span>
 
 <span class="c1"># If not using syslog, the log file that monit will use.</span>
-<span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"logfile"</span><span class="o">]</span>           <span class="o">=</span> <span class="s2">"/var/log/monit.log"</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"logfile"</span><span class="o">]</span> <span class="o">=</span> <span class="s2">"/var/log/monit.log"</span>
+
+<span class="c1"># Where Monit stores unique Monit instance id</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"idfile"</span><span class="o">]</span> <span class="o">=</span> <span class="s2">"/var/.monit.id"</span>
+
+<span class="c1"># Where Monit stores Monit state file</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"statefile"</span><span class="o">]</span> <span class="o">=</span> <span class="s2">"/var/lib/monit/state"</span>
 
 <span class="c1"># Enable emails for internal monit alerts</span>
-<span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"mail_alerts"</span><span class="o">]</span>       <span class="o">=</span> <span class="kp">true</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"mail_alerts"</span><span class="o">]</span> <span class="o">=</span> <span class="kp">true</span>
+
+<span class="c1"># Ignore alerts for specific events</span>
+<span class="c1"># Possible events include: action, checksum, connection, content, data, exec, fsflags, gid, icmp, instance, invalid, nonexist, permission, pid, ppid, resource, size, status, timeout, timestamp, uid, uptime.</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"alert_ignore_events"</span><span class="o">]</span> <span class="o">=</span> <span class="o">[]</span>
 
 <span class="c1"># Email address that will be notified of events.</span>
-<span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"alert_email"</span><span class="o">]</span>       <span class="o">=</span> <span class="s2">"root@localhost"</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"alert_email"</span><span class="o">]</span> <span class="o">=</span> <span class="s2">"root@localhost"</span>
 
 <span class="c1"># Enable the web interface and define credentials.</span>
 <span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"web_interface"</span><span class="o">]</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="ss">:enable</span>  <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span>
-  <span class="ss">:port</span>    <span class="o">=&gt;</span> <span class="mi">2812</span><span class="p">,</span>
-  <span class="ss">:address</span> <span class="o">=&gt;</span> <span class="s2">"localhost"</span><span class="p">,</span>
-  <span class="ss">:allow</span>   <span class="o">=&gt;</span> <span class="o">[</span><span class="s2">"localhost"</span><span class="p">,</span> <span class="s2">"admin:b1gbr0th3r"</span><span class="o">]</span>
+  <span class="ss">enable</span><span class="p">:</span>  <span class="kp">true</span><span class="p">,</span>
+  <span class="ss">port</span><span class="p">:</span>    <span class="mi">2812</span><span class="p">,</span>
+  <span class="ss">address</span><span class="p">:</span> <span class="s2">"localhost"</span><span class="p">,</span>
+  <span class="ss">allow</span><span class="p">:</span>   <span class="o">[</span><span class="s2">"localhost"</span><span class="p">,</span> <span class="s2">"admin:b1gbr0th3r"</span><span class="o">]</span>
 <span class="p">}</span>
 
 <span class="c1"># Email settings that will be used for notification of events.</span>
 <span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"mail"</span><span class="o">]</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="ss">:hostname</span> <span class="o">=&gt;</span> <span class="s2">"localhost"</span><span class="p">,</span>
-  <span class="ss">:port</span>     <span class="o">=&gt;</span> <span class="mi">25</span><span class="p">,</span>
-  <span class="ss">:username</span> <span class="o">=&gt;</span> <span class="kp">nil</span><span class="p">,</span>
-  <span class="ss">:password</span> <span class="o">=&gt;</span> <span class="kp">nil</span><span class="p">,</span>
-  <span class="ss">:from</span>     <span class="o">=&gt;</span> <span class="s2">"monit@$HOST"</span><span class="p">,</span>
-  <span class="ss">:subject</span>  <span class="o">=&gt;</span> <span class="s2">"$SERVICE $EVENT at $DATE"</span><span class="p">,</span>
-  <span class="ss">:message</span>  <span class="o">=&gt;</span> <span class="s2">"Monit $ACTION $SERVICE at $DATE on $HOST,</span><span class="se">\n\n</span><span class="s2">$DESCRIPTION</span><span class="se">\n\n</span><span class="s2">Dutifully,</span><span class="se">\n</span><span class="s2">Monit"</span><span class="p">,</span>
-  <span class="ss">:security</span> <span class="o">=&gt;</span> <span class="kp">nil</span><span class="p">,</span>  <span class="c1"># 'SSLV2'|'SSLV3'|'TLSV1'</span>
-  <span class="ss">:timeout</span>  <span class="o">=&gt;</span> <span class="mi">30</span>
+  <span class="ss">hostname</span><span class="p">:</span> <span class="s2">"localhost"</span><span class="p">,</span>
+  <span class="ss">port</span><span class="p">:</span>     <span class="mi">25</span><span class="p">,</span>
+  <span class="ss">username</span><span class="p">:</span> <span class="kp">nil</span><span class="p">,</span>
+  <span class="ss">password</span><span class="p">:</span> <span class="kp">nil</span><span class="p">,</span>
+  <span class="ss">encrypted_credentials</span><span class="p">:</span> <span class="kp">nil</span><span class="p">,</span>
+  <span class="ss">encrypted_credentials_data_bag</span><span class="p">:</span> <span class="s2">"credentials"</span><span class="p">,</span>
+  <span class="ss">from</span><span class="p">:</span>     <span class="s2">"monit@$HOST"</span><span class="p">,</span>
+  <span class="ss">subject</span><span class="p">:</span>  <span class="s2">"$SERVICE $EVENT at $DATE"</span><span class="p">,</span>
+  <span class="ss">message</span><span class="p">:</span>  <span class="s2">"Monit $ACTION $SERVICE at $DATE on $HOST,</span><span class="se">\n\n</span><span class="s2">$DESCRIPTION</span><span class="se">\n\n</span><span class="s2">Dutifully,</span><span class="se">\n</span><span class="s2">Monit"</span><span class="p">,</span>
+  <span class="ss">security</span><span class="p">:</span> <span class="kp">nil</span><span class="p">,</span>  <span class="c1"># 'SSLV2'|'SSLV3'|'TLSV1'</span>
+  <span class="ss">timeout</span><span class="p">:</span>  <span class="mi">30</span>
 <span class="p">}</span>
 
 <span class="k">case</span> <span class="n">node</span><span class="o">[</span><span class="s2">"platform_family"</span><span class="o">]</span>
 <span class="k">when</span> <span class="s2">"rhel"</span><span class="p">,</span> <span class="s2">"fedora"</span><span class="p">,</span> <span class="s2">"suse"</span>
   <span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"main_config_path"</span><span class="o">]</span> <span class="o">=</span> <span class="s2">"/etc/monit.conf"</span>
-  <span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"includes_dir"</span><span class="o">]</span>     <span class="o">=</span> <span class="s2">"/etc/monit.d"</span>
+  <span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"includes_dir"</span><span class="o">]</span> <span class="o">=</span> <span class="s2">"/etc/monit.d"</span>
 <span class="k">else</span>
   <span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"main_config_path"</span><span class="o">]</span> <span class="o">=</span> <span class="s2">"/etc/monit/monitrc"</span>
-  <span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"includes_dir"</span><span class="o">]</span>     <span class="o">=</span> <span class="s2">"/etc/monit/conf.d"</span>
+  <span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"includes_dir"</span><span class="o">]</span> <span class="o">=</span> <span class="s2">"/etc/monit/conf.d"</span>
 <span class="k">end</span>
 
 <span class="c1"># The monit::default recipe will load these monit_monitrc resources automatically</span>
 <span class="c1"># NOTE setting this attribute at the default level will append values to the array</span>
-<span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"default_monitrc_configs"</span><span class="o">]</span> <span class="o">=</span> <span class="o">[</span><span class="s2">"load"</span><span class="p">,</span> <span class="s2">"ssh"</span><span class="o">]</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"default_monitrc_configs"</span><span class="o">]</span> <span class="o">=</span> <span class="sx">%w[load ssh]</span>
+
+<span class="c1"># Whether the monit service should be reloaded when a configuration changes</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"reload_on_change"</span><span class="o">]</span> <span class="o">=</span> <span class="kp">true</span>
+
+<span class="c1"># `MONIT_OPTS` for /etc/default/monit</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"init_opts"</span><span class="o">]</span> <span class="o">=</span> <span class="s2">""</span>
+
+<span class="c1"># specify a particular version of the monit package you want installed,</span>
+<span class="c1"># otherwise it will install the default. this value is ignored when performing a</span>
+<span class="c1"># source install.</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"version"</span><span class="o">]</span> <span class="o">=</span> <span class="kp">nil</span>
+
+<span class="c1"># source install specifics</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"source_install"</span><span class="o">]</span> <span class="o">=</span> <span class="kp">false</span>
+
+<span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"source"</span><span class="o">][</span><span class="s2">"version"</span><span class="o">]</span> <span class="o">=</span> <span class="s2">"5.7"</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"source"</span><span class="o">][</span><span class="s2">"prefix"</span><span class="o">]</span> <span class="o">=</span> <span class="s2">"/usr/local"</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"source"</span><span class="o">][</span><span class="s2">"url"</span><span class="o">]</span> <span class="o">=</span> <span class="s2">"https://mmonit.com/monit/dist/monit-5.7.tar.gz"</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"source"</span><span class="o">][</span><span class="s2">"checksum"</span><span class="o">]</span> <span class="o">=</span> <span class="s2">"bb250ab011d805b5693972afdf95509e79bb3b390caa763275c9501f74b598a2"</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"source"</span><span class="o">][</span><span class="s2">"pam_support"</span><span class="o">]</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"source"</span><span class="o">][</span><span class="s2">"ssl_support"</span><span class="o">]</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"source"</span><span class="o">][</span><span class="s2">"large_file_support"</span><span class="o">]</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"monit"</span><span class="o">][</span><span class="s2">"source"</span><span class="o">][</span><span class="s2">"compiler_optimized"</span><span class="o">]</span> <span class="o">=</span> <span class="kp">true</span>
 </pre></div>
 
 <h2>
@@ -172,6 +207,7 @@
 <li>whyrun support for monitrc provider</li>
 <li>support for reloading monit without restart</li>
 <li>don't render 'use address' if no address is provided</li>
+<li>fix attribute comments</li>
 </ul>
 </li>
 <li>
@@ -225,6 +261,65 @@
 
 <ul>
 <li>fix logging logic</li>
+</ul>
+</li>
+<li>
+<strong><a href="https://github.com/pauloricardomg">@pauloricardomg</a></strong>
+
+<ul>
+<li>add <code>alert_ignore_events</code> attribute</li>
+<li>add <code>reload_on_change</code> attribute</li>
+</ul>
+</li>
+<li>
+<strong><a href="https://github.com/drywheat">@drywheat</a></strong>
+
+<ul>
+<li>support encrypted data bag for smtp credentials</li>
+<li>add support for installation from source vs. package</li>
+</ul>
+</li>
+<li>
+<strong><a href="https://github.com/esigler">@esigler</a></strong>
+
+<ul>
+<li>allow either style of monit startup flag to work</li>
+</ul>
+</li>
+<li>
+<strong><a href="https://github.com/evan2645">@evan2645</a></strong>
+
+<ul>
+<li>fix bug in which monit is not started during bootstrap</li>
+</ul>
+</li>
+<li>
+<strong><a href="https://github.com/mvdkleijn">@mvdkleijn</a></strong>
+
+<ul>
+<li>add settings for idfile and statefile</li>
+</ul>
+</li>
+<li>
+<strong><a href="https://github.com/mbanton">@mbanton</a></strong>
+
+<ul>
+<li>fix <code>statefile</code> attribute in <code>monitrc</code> template</li>
+</ul>
+</li>
+<li>
+<strong><a href="https://github.com/foxycoder">@foxycoder</a></strong>
+
+<ul>
+<li>add support for binary install</li>
+</ul>
+</li>
+<li>
+<strong><a href="https://github.com/ijin">@ijin</a></strong>
+
+<ul>
+<li>add <code>using_hostname</code> attribute</li>
+<li>better ssh support for Amazon Linux</li>
 </ul>
 </li>
 </ul><h2>
