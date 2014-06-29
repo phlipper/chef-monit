@@ -8,6 +8,7 @@ version           "1.5.3"
 
 recipe "monit", "Sets up the service definition and default checks."
 recipe "monit::install_source", "Compiles and installs monit from source."
+recipe "monit::install_binary", "Installs monit from a binary package."
 
 depends "build-essential"
 suggests "apt"

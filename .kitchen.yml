@@ -28,3 +28,9 @@ suites:
     attributes:
       monit:
         source_install: true
+  - name: binary
+    run_list:
+      - recipe[monit]
+    attributes:
+      monit:
+        binary_install: true
