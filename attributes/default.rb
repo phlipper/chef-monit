@@ -54,7 +54,7 @@ default["monit"]["mail"] = {
   message:  "Monit $ACTION $SERVICE at $DATE on $HOST,\n\n$DESCRIPTION\n\nDutifully,\nMonit",
   security: nil,  # 'SSLV2'|'SSLV3'|'TLSV1'
   timeout:  30,
-  hostname: nil
+  using_hostname: nil
 }
 
 case node["platform_family"]
