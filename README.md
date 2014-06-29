@@ -190,6 +190,8 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
     * fix `statefile` attribute in `monitrc` template
 * **[@foxycoder](https://github.com/foxycoder)**
     * add support for binary install
+* **[@ijin](https://github.com/ijin)**
+    * add `using_hostname` attribute
 
 
 ## Contributing
