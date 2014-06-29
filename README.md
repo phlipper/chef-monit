@@ -192,6 +192,7 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
     * add support for binary install
 * **[@ijin](https://github.com/ijin)**
     * add `using_hostname` attribute
+    * better ssh support for Amazon Linux
 
 
 ## Contributing
