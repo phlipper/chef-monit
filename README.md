@@ -188,6 +188,8 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
     * add settings for idfile and statefile
 * **[@mbanton](https://github.com/mbanton)**
     * fix `statefile` attribute in `monitrc` template
+* **[@foxycoder](https://github.com/foxycoder)**
+    * add support for binary install
 
 
 ## Contributing
