@@ -26,7 +26,7 @@ CONFIG="<%= @config %>"
 NAME=monit
 DESC="daemon monitor"
 MONIT_OPTS=
-PID="/run/$NAME.pid"
+PID="<%= @pidfile %>"
 
 # Check if DAEMON binary exist
 [ -f $DAEMON ] || exit 0

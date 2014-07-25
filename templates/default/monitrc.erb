@@ -11,6 +11,11 @@ set logfile syslog facility log_daemon
 set logfile <%= node["monit"]["logfile"] %>
 <% end %>
 
+# Set location of Monit pid file
+<% if node["monit"]["pidfile"] %>
+set pidfile <%= node["monit"]["pidfile"] %>
+<% end %>
+
 # Set location of Monit id file
 <% if node["monit"]["idfile"] %>
 set idfile <%= node["monit"]["idfile"] %>
