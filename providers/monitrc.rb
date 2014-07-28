@@ -2,6 +2,8 @@ def whyrun_supported?
   true
 end
 
+use_inline_resources if defined?(use_inline_resources)
+
 action :create do
   name = new_resource.name
 
