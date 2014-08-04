@@ -24,7 +24,7 @@ config_dir = File.dirname(node["monit"]["main_config_path"])
 end
 
 template "/etc/init.d/monit" do
-  source "monit.init.erb"
+  source "#{node['platform_family']}/monit.init.erb"
   mode "0755"
   variables(
     prefix: node["monit"]["binary"]["prefix"],
