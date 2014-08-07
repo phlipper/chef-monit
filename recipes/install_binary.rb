@@ -28,7 +28,8 @@ template "/etc/init.d/monit" do
   mode "0755"
   variables(
     prefix: node["monit"]["binary"]["prefix"],
-    config: node["monit"]["main_config_path"]
+    config: node["monit"]["main_config_path"],
+    pidfile: node["monit"]["pidfile"]
   )
 end
 
