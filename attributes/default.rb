@@ -32,6 +32,7 @@ default["monit"]["alert_ignore_events"] = []
 
 # Email addresses that will be notified of events.
 default["monit"]["alert_emails"] = ["root@localhost"]
+default["monit"]["alert_email"] = "root@localhost"
 
 # Enable the web interface and define credentials.
 default["monit"]["web_interface"] = {
