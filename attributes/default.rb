@@ -30,8 +30,7 @@ default["monit"]["mail_alerts"] = true
 # Possible events include: action, checksum, connection, content, data, exec, fsflags, gid, icmp, instance, invalid, nonexist, permission, pid, ppid, resource, size, status, timeout, timestamp, uid, uptime.
 default["monit"]["alert_ignore_events"] = []
 
-# Email addresses that will be notified of events.
-default["monit"]["alert_emails"] = ["root@localhost"]
+# Email addresses that will be notified of events. Can take an array for multiple emails.
 default["monit"]["alert_email"] = "root@localhost"
 
 # Enable the web interface and define credentials.
