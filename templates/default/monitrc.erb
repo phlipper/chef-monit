@@ -21,9 +21,11 @@ set idfile <%= node["monit"]["idfile"] %>
 set statefile <%= node["monit"]["statefile"] %>
 <% end %>
 
-<% if node['monit']['mail_alerts'] %>
+<% if node["monit"]["mail_alerts"] %>
 # Mail alerts
-set alert <%= node["monit"]["alert_email"] %> <%= node["monit"]["alert_ignore_events"].empty? ? "" : "but not on { #{node["monit"]["alert_ignore_events"].join(", ")} }" %>
+  <% Array(node["monit"]["alert_email"]).each do | email | %>
+    set alert <%= email %> <%= node["monit"]["alert_ignore_events"].empty? ? "" : "but not on { #{node["monit"]["alert_ignore_events"].join(", ")} }" %>
+  <% end %>
 <% end %>
 
 set mailserver <%= node["monit"]["mail"]["hostname"] %> port <%= node["monit"]["mail"]["port"] %>
