@@ -23,7 +23,17 @@ set statefile <%= node["monit"]["statefile"] %>
 
 <% if node['monit']['mail_alerts'] %>
 # Mail alerts
-set alert <%= node["monit"]["alert_email"] %> <%= node["monit"]["alert_ignore_events"].empty? ? "" : "but not on { #{node["monit"]["alert_ignore_events"].join(", ")} }" %>
+<% alert_email_map = node['monit']['alert_email'] %>
+<% unless alert_email_map.is_a? Hash %>
+  <% alert_email_map = { alert_email_map => { 'onlyon_events' => node['monit']['alert_onlyon_events'], 'ignore_events' => node['monit']['alert_ignore_events'] } } %>
+<% end %>
+<% alert_email_map.each do |alert_emails, events_map| %>
+  <% onlyon = events_map['onlyon_events'].join(', ') rescue '' %>
+  <% ignore = events_map['ignore_events'].join(', ') rescue '' %>
+  <% (alert_emails.is_a?(Array) ? alert_emails : alert_emails.split(/[, ]+/)).each do |alert_email| %>
+set alert <%= alert_email %> <%= onlyon.empty? ? '' : "on { #{onlyon} }" %> <%= ignore.empty? ? '' : "but not on { #{ignore} }" %>
+  <% end %>
+<% end %>
 <% end %>
 
 set mailserver <%= node["monit"]["mail"]["hostname"] %> port <%= node["monit"]["mail"]["port"] %>
