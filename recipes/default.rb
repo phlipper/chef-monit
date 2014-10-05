@@ -48,6 +48,12 @@ directory "/var/monit" do
   mode  "0700"
 end
 
+if state_file = node["monit"]["statefile"]
+  directory state_file.split("/")[0..-2].join('/') do
+    recursive true
+  end
+end
+
 # enable service startup
 file "/etc/default/monit" do
   owner "root"
