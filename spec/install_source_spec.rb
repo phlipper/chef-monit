@@ -35,6 +35,11 @@ describe "monit::install_source" do
       end.converge("yum-epel", described_recipe)
     end
 
+    before do
+      stub_command("chkconfig --list | grep 'monit ' | grep '2:on'")
+        .and_return(false)
+    end
+
     specify do
       expect(chef_run).to install_package "pam-devel"
       expect(chef_run).to install_package "openssl-devel"

@@ -57,6 +57,9 @@ default["monit"]["start_delay"] = 0
 # How frequently the monit daemon polls for changes.
 default["monit"]["polling_frequency"] = 20
 
+# Where Monit stores the pid file
+default["monit"]["pidfile"] = "/var/run/monit.pid"
+
 # Use syslog for logging instead of a logfile.
 default["monit"]["use_syslog"] = true
 
