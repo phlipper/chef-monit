@@ -3,7 +3,7 @@ require "spec_helper"
 describe "monit::install_package" do
   describe "debian platform family" do
     let(:chef_run) do
-      ChefSpec::Runner.new do |node|
+      ChefSpec::SoloRunner.new do |node|
         node.set["monit"]["version"] = "1.2.3"
       end.converge("apt", described_recipe)
     end
@@ -17,7 +17,7 @@ describe "monit::install_package" do
   describe "redhat platform family" do
     let(:chef_run) do
       platform = { platform: "centos", version: "6.5" }
-      ChefSpec::Runner.new(platform).converge("yum-epel", described_recipe)
+      ChefSpec::SoloRunner.new(platform).converge("yum-epel", described_recipe)
     end
 
     specify do

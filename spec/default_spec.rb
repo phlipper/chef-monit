@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe "monit::default" do
   let(:chef_run) do
-    ChefSpec::Runner.new.converge("apt", described_recipe)
+    ChefSpec::SoloRunner.new.converge("apt", described_recipe)
   end
 
   specify do
@@ -67,8 +67,9 @@ describe "monit::default" do
     end
 
     let(:chef_run) do
-      ChefSpec::Runner.new do |node|
+      ChefSpec::SoloRunner.new do |node|
         node.set["monit"]["source_install"] = true
+        node.set["monit"]["source"]["version"] = "1.2.3"
       end.converge("apt", described_recipe)
     end
 
