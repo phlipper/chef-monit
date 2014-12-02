@@ -25,22 +25,20 @@ if encrypted_credentials
   Chef::Log.info "Using encrpyted mail credentials: #{encrypted_credentials}"
 end
 
-should_reload = node["monit"]["reload_on_change"]
-
 # configuration file
 template node["monit"]["main_config_path"] do
   owner  "root"
   group  "root"
   mode   "0600"
   source "monitrc.erb"
-  notifies :reload, "service[monit]", :delayed if should_reload
+  notifies :reload, "service[monit]" if node["monit"]["reload_on_change"]
 end
 
 # build default monitrc files
 node["monit"]["default_monitrc_configs"].each do |conf|
   monit_monitrc conf do
     variables(category: "system")
-    notifies :reload, "service[monit]", :delayed
+    notifies :reload, "service[monit]"
   end
 end
 
@@ -59,21 +57,17 @@ file "/etc/default/monit" do
     "START=yes",
     "MONIT_OPTS=#{node["monit"]["init_opts"]}"
   ].join("\n")
-  notifies :restart, "service[monit]", :delayed
+  notifies :restart, "service[monit]"
 end
 
 # system service
 service "monit" do
-  supports restart: true, start: true, reload: true
+  supports restart: true, reload: true
   action [:enable, :start]
 
   if platform?("debian")
     start_command   "/usr/sbin/invoke-rc.d monit start"
     restart_command "/usr/sbin/invoke-rc.d monit restart"
     reload_command  "/etc/init.d/monit reload"
-  else
-    start_command   "service monit start"
-    restart_command "service monit restart"
-    reload_command  "service monit reload"
   end
 end
