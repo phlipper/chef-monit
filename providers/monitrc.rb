@@ -15,6 +15,9 @@ action :create do
     notifies :reload, "service[monit]" if node["monit"]["reload_on_change"]
   end
 
+  # Run the action immediately so the LWRP's updated_by_last_action setting is correct
+  t.run_action(:create)
+
   new_resource.updated_by_last_action(t.updated_by_last_action?)
 end
 
@@ -23,6 +26,9 @@ action :delete do
     action :delete
     notifies :reload, "service[monit]"
   end
+
+  # Run the action immediately so the LWRP's updated_by_last_action setting is correct
+  f.run_action(:delete)
 
   new_resource.updated_by_last_action(f.updated_by_last_action?)
 end
