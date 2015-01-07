@@ -13,6 +13,7 @@ action :create do
     cookbook new_resource.template_cookbook
     variables new_resource.variables
     notifies :reload, "service[monit]" if node["monit"]["reload_on_change"]
+    action :nothing
   end
 
   # Run the action immediately so the LWRP's updated_by_last_action setting is correct
@@ -23,7 +24,7 @@ end
 
 action :delete do
   f = file "#{node["monit"]["includes_dir"]}/#{new_resource.name}.monitrc" do
-    action :delete
+    action :nothing
     notifies :reload, "service[monit]"
   end
 
