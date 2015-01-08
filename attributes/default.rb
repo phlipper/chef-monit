@@ -87,10 +87,10 @@ default["monit"]["version"] = nil
 default["monit"]["source_install"] = false
 default["monit"]["source_uninstall"] = false
 
-default["monit"]["source"]["version"] = "5.7"
+default["monit"]["source"]["version"] = "5.11"
 default["monit"]["source"]["prefix"] = "/usr/local"
-default["monit"]["source"]["url"] = "https://mmonit.com/monit/dist/monit-5.7.tar.gz"
-default["monit"]["source"]["checksum"] = "bb250ab011d805b5693972afdf95509e79bb3b390caa763275c9501f74b598a2"
+default["monit"]["source"]["url"] = "https://mmonit.com/monit/dist/monit-5.11.tar.gz"
+default["monit"]["source"]["checksum"] = "d507957b1e18e6f45af5a4d3f94529ab22b26f522f5f62287919bc905c44283a"
 default["monit"]["source"]["pam_support"] = true
 default["monit"]["source"]["ssl_support"] = true
 default["monit"]["source"]["large_file_support"] = true
@@ -100,7 +100,7 @@ default["monit"]["source"]["compiler_optimized"] = true
 default["monit"]["binary_install"] = false
 default["monit"]["binary_uninstall"] = false
 
-default["monit"]["binary"]["version"] = "5.8.1"
+default["monit"]["binary"]["version"] = "5.11"
 default["monit"]["binary"]["prefix"] = "/usr"
-default["monit"]["binary"]["url"] = "http://mmonit.com/monit/dist/binary/5.8.1/monit-5.8.1-linux-x64.tar.gz"
-default["monit"]["binary"]["checksum"] = "a4e2bba336c99ade1d90435fae166d672f206ffcc9219c1be9a3968b9131c011"
+default["monit"]["binary"]["url"] = "http://mmonit.com/monit/dist/binary/5.11/monit-5.11-linux-x64.tar.gz"
+default["monit"]["binary"]["checksum"] = "bee00da32dbf4c948587277ac66bac9c68373aff6a15924b632cf9508e097783"
