@@ -1,25 +1,35 @@
-require "spec_helper"
+require "serverspec"
+
+set :backend, :exec
+
+def redhat?
+  os[:family] == "redhat"
+end
+
+def status_command
+  config_file = redhat? ? "/etc/monit.conf" : "/etc/monit/monitrc"
+  "monit -c #{config_file} status"
+end
 
 describe "Source install of monit" do
-  it "does not install monit via package manager" do
-    expect(package "monit").to_not be_installed
+  describe package("monit") do
+    it { should_not be_installed }
   end
 
-  it "installs the desired version of monit" do
-    expect(command "/usr/local/bin/monit -V").to return_stdout(/version 5\.7/)
+  describe command("monit -V") do
+    its(:stdout) { should match(/version 5\.7/) }
+    its(:exit_status) { should eq 0 }
   end
 
-  it "enables the monit service" do
-    expect(service "monit").to be_enabled
+  describe service("monit") do
+    it { should be_enabled }
+    it { should be_running }
   end
 
-  it "starts monit in the background" do
-    expect(service "monit").to be_running
-  end
-
-  describe command("/usr/local/bin/monit status") do
-    it { should return_stdout(/System '[\w\-\.]+'/) }
-    it { should return_stdout(/status\s+Running/) }
-    it { should return_stdout(/monitoring status\s+Monitored/) }
+  describe command(status_command) do
+    its(:stdout) { should match(/System '[\w\-\.]+'/) }
+    its(:stdout) { should match(/status\s+Running/) }
+    its(:stdout) { should match(/monitoring status\s+Monitored/) }
+    its(:exit_status) { should eq 0 }
   end
 end
