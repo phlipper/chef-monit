@@ -1,10 +1,10 @@
 name              "monit"
-maintainer        "Phil Cohen"
-maintainer_email  "github@phlippers.net"
+maintainer        "Rick Hull"
+maintainer_email  "rick.hull@glassdoor.com"
 license           "MIT"
 description       "Configures monit"
 long_description  "Please refer to README.md"
-version           "1.5.4"
+version           "1.5.8"
 
 recipe "monit", "Sets up the service definition and default checks."
 recipe "monit::install_source", "Compiles and installs monit from source."
