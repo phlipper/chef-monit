@@ -1,6 +1,6 @@
 name              "monit"
-maintainer        "Rick Hull"
-maintainer_email  "rick.hull@glassdoor.com"
+maintainer        "Phil Cohen"
+maintainer_email  "github@phlippers.net"
 license           "MIT"
 description       "Configures monit"
 long_description  "Please refer to README.md"
