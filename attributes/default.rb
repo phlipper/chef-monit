@@ -87,10 +87,10 @@ default["monit"]["version"] = nil
 default["monit"]["source_install"] = false
 default["monit"]["source_uninstall"] = false
 
-default["monit"]["source"]["version"] = "5.11"
+default["monit"]["source"]["version"] = "5.12.2"
 default["monit"]["source"]["prefix"] = "/usr/local"
-default["monit"]["source"]["url"] = "https://mmonit.com/monit/dist/monit-5.11.tar.gz"
-default["monit"]["source"]["checksum"] = "d507957b1e18e6f45af5a4d3f94529ab22b26f522f5f62287919bc905c44283a"
+default["monit"]["source"]["url"] = "https://mmonit.com/monit/dist/monit-#{node['monit']['source']['version']}.tar.gz"
+default["monit"]["source"]["checksum"] = "8ab0296d1aa2351b1573481592d7b5e06de1edd49dff1b5552839605a450914c"
 default["monit"]["source"]["pam_support"] = true
 default["monit"]["source"]["ssl_support"] = true
 default["monit"]["source"]["large_file_support"] = true
