@@ -1,6 +1,4 @@
-[![Build Status](https://travis-ci.org/Glassdoor/chef-monit.svg?branch=master)](https://travis-ci.org/Glassdoor/chef-monit)
-
-# chef-monit
+# chef-monit  [![Build Status](http://img.shields.io/travis-ci/phlipper/chef-monit.png)](http://travis-ci.org/phlipper/chef-monit)
 
 ## Description
 
@@ -224,5 +222,8 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
 
 **chef-monit**
 
-* Freely distributable and licensed under the MIT license
-* Copyright (c) 2011-2014 Phil Cohen (github@phlippers.net)
+* Freely distributable and licensed under the [MIT license](http://phlipper.mit-license.org/2011-2014/license.html).
+* Copyright (c) 2011-2014 Phil Cohen (github@phlippers.net) [![endorse](http://api.coderwall.com/phlipper/endorsecount.png)](http://coderwall.com/phlipper)  [![Gittip](http://img.shields.io/gittip/phlipper.png)](https://www.gittip.com/phlipper/)
+* http://phlippers.net/
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/phlipper/chef-monit/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
