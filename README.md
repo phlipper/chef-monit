@@ -210,6 +210,8 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
 * **[@rickhull](https://github.com/rickhull)**
     * update to use latest monit versions
     * add proper rhel-family support with init script template
+* **[@dougbarth](https://github.com/dougbarth)**
+    * fix lwrp `updated_by_last_action`
 
 
 ## Contributing
