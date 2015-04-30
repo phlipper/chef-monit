@@ -11,12 +11,12 @@ Installs the `monit` package from (http://mmonit.com/monit/).
 
 The following platforms are supported by this cookbook, meaning that the recipes run on these platforms without error:
 
-* Ubuntu
-* Debian
+* Ubuntu 12.04, 14.04
+* Debian 7.8, 8.0
 * RedHat
-* CentOS
+* CentOS 6.6, 7.1
 * Scientific
-* Fedora
+* Fedora 21
 * SUSE
 * Amazon
 
