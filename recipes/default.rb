@@ -64,10 +64,4 @@ end
 service "monit" do
   supports restart: true, reload: true
   action [:enable, :start]
-
-  if platform?("debian")
-    start_command   "/usr/sbin/invoke-rc.d monit start"
-    restart_command "/usr/sbin/invoke-rc.d monit restart"
-    reload_command  "/etc/init.d/monit reload"
-  end
 end
