@@ -9,7 +9,7 @@ gem "berkshelf", "~> 3.1.3"
 gem "foodcritic", "~> 4.0.0"
 gem "rake"
 gem "rspec", "~> 2.99"
-gem "rubocop", "~> 0.23.0"
+gem "rubocop", "~> 0.23"
 gem "serverspec", "~> 1.9.0"
 
 group :integration do
