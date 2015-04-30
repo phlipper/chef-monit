@@ -2,12 +2,14 @@ require "spec_helper"
 
 describe "monit::default" do
   let(:chef_run) do
-    ChefSpec::Runner.new.converge("apt", described_recipe)
+    ChefSpec::SoloRunner.new.converge("apt", described_recipe)
   end
 
-  it { expect(chef_run).to include_recipe "apt" }
-  it { expect(chef_run).to include_recipe "monit::install_package" }
-  it { expect(chef_run).to_not include_recipe "monit::install_source" }
+  specify do
+    expect(chef_run).to include_recipe "apt"
+    expect(chef_run).to include_recipe "monit::install_package"
+    expect(chef_run).to_not include_recipe "monit::install_source"
+  end
 
   # optionally use encrypted mail credentials
   # node["monit"]["mail"]["encrypted_credentials"]
@@ -60,13 +62,22 @@ describe "monit::default" do
   end
 
   describe "source installation" do
+    let(:remote_tarball) do
+      "#{Chef::Config[:file_cache_path]}/monit-1.2.3.tgz"
+    end
+
     let(:chef_run) do
-      ChefSpec::Runner.new do |node|
+      ChefSpec::SoloRunner.new do |node|
         node.set["monit"]["source_install"] = true
+        node.set["monit"]["source"]["version"] = "1.2.3"
       end.converge("apt", described_recipe)
     end
 
-    it { expect(chef_run).to_not include_recipe "monit::install_package" }
-    it { expect(chef_run).to include_recipe "monit::install_source" }
+    specify do
+      expect(chef_run).to_not include_recipe "monit::install_package"
+      expect(chef_run).to include_recipe "monit::install_source"
+
+      expect(chef_run).to create_remote_file_if_missing(remote_tarball)
+    end
   end
 end

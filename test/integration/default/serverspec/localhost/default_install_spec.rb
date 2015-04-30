@@ -1,42 +1,38 @@
-require "spec_helper"
+require "serverspec"
+
+set :backend, :exec
+
+def redhat?
+  os[:family] == "redhat"
+end
 
 describe "Default install of monit" do
-  it "installed monit via package manager" do
-    expect(package "monit").to be_installed
+  describe package("monit") do
+    it { should be_installed }
   end
 
-  it "installed the desired version of monit" do
-    expect(command "monit -V").to return_stdout(/monit version \d\.\d/i)
+  describe command("monit -V") do
+    its(:stdout) { should match(/monit version \d\.\d/i) }
+    its(:exit_status) { should eq 0 }
   end
 
-  it "enabled the monit service" do
-    expect(service "monit").to be_enabled
-  end
-
-  it "started monit in the background" do
-    expect(service "monit").to be_running
+  describe service("monit") do
+    it { should be_enabled }
+    it { should be_running }
   end
 
   describe command("monit status") do
-    it "properly configured system monitoring" do
-      should return_stdout(/System '[\w\-\.]+'/)
+    its(:stdout) { should match(/System '[\w\-\.]+'/) }
+    its(:stdout) do
+      should match(/monitoring status\s+(Initializing|Monitored)/i)
     end
 
-    it "properly enabled system monitoring" do
-      # centos 6.5 is old and has different output
-      if centos65?
-        true
-      else
-        should return_stdout(/status\s+Running/)
-      end
+    if redhat?
+      its(:stdout) { should match(/The Monit daemon \d\.\d\.\d uptime: \d+m/) }
+    else
+      its(:stdout) { should match(/status\s+(Initializing|Running)/) }
     end
 
-    it "properly monitored the system" do
-      if centos65?
-        true
-      else
-        should return_stdout(/monitoring status\s+Monitored/)
-      end
-    end
+    its(:exit_status) { should eq 0 }
   end
 end

@@ -11,12 +11,12 @@ Installs the `monit` package from (http://mmonit.com/monit/).
 
 The following platforms are supported by this cookbook, meaning that the recipes run on these platforms without error:
 
-* Ubuntu
-* Debian
+* Ubuntu 12.04, 14.04
+* Debian 7.8, 8.0
 * RedHat
-* CentOS
+* CentOS 6.6, 7.1
 * Scientific
-* Fedora
+* Fedora 21
 * SUSE
 * Amazon
 
@@ -56,6 +56,9 @@ default["monit"]["start_delay"] = 0
 
 # How frequently the monit daemon polls for changes.
 default["monit"]["polling_frequency"] = 20
+
+# Where Monit stores the pid file
+default["monit"]["pidfile"] = "/var/run/monit.pid"
 
 # Use syslog for logging instead of a logfile.
 default["monit"]["use_syslog"] = true
@@ -99,7 +102,8 @@ default["monit"]["mail"] = {
   subject:  "$SERVICE $EVENT at $DATE",
   message:  "Monit $ACTION $SERVICE at $DATE on $HOST,\n\n$DESCRIPTION\n\nDutifully,\nMonit",
   security: nil,  # 'SSLV2'|'SSLV3'|'TLSV1'
-  timeout:  30
+  timeout:  30,
+  using_hostname: nil
 }
 
 case node["platform_family"]
@@ -128,6 +132,7 @@ default["monit"]["version"] = nil
 
 # source install specifics
 default["monit"]["source_install"] = false
+default["monit"]["source_uninstall"] = false
 
 default["monit"]["source"]["version"] = "5.7"
 default["monit"]["source"]["prefix"] = "/usr/local"
@@ -137,6 +142,15 @@ default["monit"]["source"]["pam_support"] = true
 default["monit"]["source"]["ssl_support"] = true
 default["monit"]["source"]["large_file_support"] = true
 default["monit"]["source"]["compiler_optimized"] = true
+
+# binary install specifics
+default["monit"]["binary_install"] = false
+default["monit"]["binary_uninstall"] = false
+
+default["monit"]["binary"]["version"] = "5.8.1"
+default["monit"]["binary"]["prefix"] = "/usr"
+default["monit"]["binary"]["url"] = "http://mmonit.com/monit/dist/binary/5.8.1/monit-5.8.1-linux-x64.tar.gz"
+default["monit"]["binary"]["checksum"] = "a4e2bba336c99ade1d90435fae166d672f206ffcc9219c1be9a3968b9131c011"
 ```
 
 ## Contributors

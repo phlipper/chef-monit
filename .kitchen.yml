@@ -1,22 +1,30 @@
 driver:
-  require_chef_omnibus: <%= ENV.fetch("CHEF_VERSION", "latest") %>
-  ssh_key: <%= File.expand_path("./test/support/keys/vagrant") %>
-  name: vagrant
+  name: docker
+  require_chef_omnibus: <%= ENV.fetch("CHEF_VERSION", "true") %>
 
 provisioner:
-  name: chef_solo
+  name: chef_zero
 
 platforms:
-  - name: debian-7.4
+  - name: debian-7.8
+    run_list:
+      - recipe[apt]
+  - name: debian-8.0
     run_list:
       - recipe[apt]
   - name: ubuntu-12.04
     run_list:
       - recipe[apt]
-  - name: centos-6.5
+  - name: ubuntu-14.04
+    run_list:
+      - recipe[apt]
+  - name: centos-6.6
     run_list:
       - recipe[yum-epel]
-  - name: fedora-20
+  - name: centos-7.1
+    run_list:
+      - recipe[yum-epel]
+  - name: fedora-21
 
 suites:
   - name: default
