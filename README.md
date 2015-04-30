@@ -207,6 +207,9 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
 * **[@ijin](https://github.com/ijin)**
     * add `using_hostname` attribute
     * better ssh support for Amazon Linux
+* **[@rickhull](https://github.com/rickhull)**
+    * update to use latest monit versions
+    * add proper rhel-family support with init script template
 
 
 ## Contributing
