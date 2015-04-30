@@ -4,10 +4,10 @@ LineLength:
     - "**/attributes/*.rb"
     - "**/metadata.rb"
 
-StringLiterals:
+Style/StringLiterals:
   EnforcedStyle: double_quotes
 
-StringLiteralsInInterpolation:
+Style/StringLiteralsInInterpolation:
   EnforcedStyle: double_quotes
 
 PercentLiteralDelimiters:

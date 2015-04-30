@@ -17,7 +17,7 @@ describe "Source install of monit" do
   end
 
   describe command("monit -V") do
-    its(:stdout) { should match(/version 5\.7/) }
+    its(:stdout) { should match(/version 5\.12\.2/) }
     its(:exit_status) { should eq 0 }
   end
 
@@ -28,8 +28,10 @@ describe "Source install of monit" do
 
   describe command(status_command) do
     its(:stdout) { should match(/System '[\w\-\.]+'/) }
-    its(:stdout) { should match(/status\s+Running/) }
-    its(:stdout) { should match(/monitoring status\s+Monitored/) }
+    its(:stdout) { should match(/status\s+(Initializing|Running)/) }
+    its(:stdout) do
+      should match(/monitoring status\s+(Initializing|Monitored)/)
+    end
     its(:exit_status) { should eq 0 }
   end
 end
