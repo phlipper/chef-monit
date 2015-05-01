@@ -21,6 +21,7 @@ execute "install-monit-binary" do
     "cp bin/monit #{node["monit"]["binary"]["prefix"]}/bin/monit"
   ].join(" && ")
   action :nothing
+  not_if do ::File.exists?("#{node["monit"]["binary"]["prefix"]}/bin/monit") end
 end
 
 include_recipe "monit::_service_configuration"
