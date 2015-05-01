@@ -20,8 +20,8 @@ execute "install-monit-binary" do
     "cd #{File.basename(tar_file, ".tar.gz")}",
     "cp bin/monit #{node["monit"]["binary"]["prefix"]}/bin/monit"
   ].join(" && ")
-  action :nothing
-  not_if do ::File.exists?("#{node["monit"]["binary"]["prefix"]}/bin/monit") end
+  action :create_if_missing
+  #not_if do ::File.exists?("#{node["monit"]["binary"]["prefix"]}/bin/monit") end
 end
 
 include_recipe "monit::_service_configuration"
