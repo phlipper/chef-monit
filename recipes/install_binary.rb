@@ -8,9 +8,9 @@ cache_path = Chef::Config[:file_cache_path]
 binary = "#{node["monit"]["binary"]["prefix"]}/bin/monit"
 
 execute "rm #{binary}" do
-  only_if { File.exist?(binary)} 
+  only_if { ::File.exist?(binary) }
   not_if "monit -V | grep #{node["monit"]["binary"]["version"]}"
-	notifies :create, "remote_file[#{cache_path}/#{tar_file}]", :immediately
+  notifies :create, "remote_file[#{cache_path}/#{tar_file}]", :immediately
 end
 
 remote_file "#{cache_path}/#{tar_file}" do
