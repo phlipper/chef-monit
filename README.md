@@ -212,6 +212,8 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
     * add proper rhel-family support with init script template
 * **[@dougbarth](https://github.com/dougbarth)**
     * fix lwrp `updated_by_last_action`
+* **[@fulloflilies](https://github.com/fulloflilies)**
+    * fix converge error caused by overwriting running binary file
 
 
 ## Contributing

@@ -5,12 +5,19 @@
 
 tar_file = "monit-#{node["monit"]["binary"]["version"]}.tar.gz"
 cache_path = Chef::Config[:file_cache_path]
+binary = "#{node["monit"]["binary"]["prefix"]}/bin/monit"
+
+execute "rm #{binary}" do
+  only_if { ::File.exist?(binary) }
+  not_if "monit -V | grep #{node["monit"]["binary"]["version"]}"
+  notifies :create, "remote_file[#{cache_path}/#{tar_file}]", :immediately
+end
 
 remote_file "#{cache_path}/#{tar_file}" do
   source node["monit"]["binary"]["url"]
   checksum node["monit"]["binary"]["checksum"]
   action :create_if_missing
-  notifies :run, "execute[install-monit-binary]"
+  notifies :run, "execute[install-monit-binary]", :immediately
 end
 
 execute "install-monit-binary" do
