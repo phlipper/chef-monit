@@ -27,6 +27,8 @@ execute "install-monit-binary" do
     "cd #{File.basename(tar_file, ".tar.gz")}",
     "cp bin/monit #{node["monit"]["binary"]["prefix"]}/bin/monit"
   ].join(" && ")
+  not_if { ::File.exist?(binary) }
+  not_if "monit -V | grep #{node["monit"]["binary"]["version"]}"
   action :nothing
 end
 
