@@ -103,7 +103,7 @@ default["monit"]["source"]["compiler_optimized"] = true
 default["monit"]["binary_install"] = false
 default["monit"]["binary_uninstall"] = false
 
-default["monit"]["binary"]["version"] = "5.12.2"
+default["monit"]["binary"]["version"] = "5.13"
 default["monit"]["binary"]["prefix"] = "/usr"
 default["monit"]["binary"]["url"] = "http://mmonit.com/monit/dist/binary/#{node["monit"]["binary"]["version"]}/monit-#{node["monit"]["binary"]["version"]}-linux-x64.tar.gz"
-default["monit"]["binary"]["checksum"] = "4908143752d0ee5081a50389a9206b7c905f9f8922a062a208fecf6e729a3c77"
+default["monit"]["binary"]["checksum"] = "53f882603e8cba01afba176de15115bda09fb66ca81dc949cf8ab76611c4c0e4"
