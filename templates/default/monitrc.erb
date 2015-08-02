@@ -72,4 +72,9 @@ set httpd port <%= node["monit"]["web_interface"]["port"] %>
 <% end %>
 
 # Include config files
-include <%= node["monit"]["includes_dir"] %>/*
+include "<%= node["monit"]["includes_dir"] %>/*"
+<% if node["monit"]["includes"] && node["monit"]["includes"].size > 0 %>
+  <% node["monit"]["includes"].each do |path| %>
+include "<%= path %>"
+  <% end %>
+<% end %>
