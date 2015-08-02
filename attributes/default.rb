@@ -71,6 +71,7 @@ else
   default["monit"]["includes_dir"] = "/etc/monit/conf.d"
 end
 
+# Custom include paths.
 default["monit"]["includes"] = []
 
 # The monit::default recipe will load these monit_monitrc resources automatically
