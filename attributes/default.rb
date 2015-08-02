@@ -71,6 +71,8 @@ else
   default["monit"]["includes_dir"] = "/etc/monit/conf.d"
 end
 
+default["monit"]["includes"] = []
+
 # The monit::default recipe will load these monit_monitrc resources automatically
 # NOTE setting this attribute at the default level will append values to the array
 default["monit"]["default_monitrc_configs"] = %w[load ssh]
