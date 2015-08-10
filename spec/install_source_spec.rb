@@ -69,5 +69,9 @@ describe "monit::install_source" do
       source: "monit.init.erb",
       mode: "0755"
     )
+    expect(chef_run).to create_template("/etc/init.d/monit").
+      with_variables lambda { |x|
+        expect(x).to include(prefix: chef_run.node["monit"]["source"]["prefix"])
+      }
   end
 end

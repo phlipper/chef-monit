@@ -16,11 +16,14 @@ monit_dirs.each do |dir|
   end
 end
 
+binary_prefix = node["monit"]["source_install"] ?
+  node["monit"]["source"]["prefix"] : node["monit"]["binary"]["prefix"]
+
 template "/etc/init.d/monit" do
   source "monit.init.erb"
   mode "0755"
   variables(
-    prefix: node["monit"]["binary"]["prefix"],
+    prefix: binary_prefix,
     config: node["monit"]["main_config_path"],
     pidfile: node["monit"]["pidfile"]
   )

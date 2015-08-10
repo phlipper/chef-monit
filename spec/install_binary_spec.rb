@@ -7,6 +7,20 @@ describe "monit::install_binary" do
     "tar zxvf monit-5.12.2.tar.gz && cd monit-5.12.2 && cp bin/monit /usr/bin/monit" # rubocop:disable Metrics/LineLength
   end
 
+  # shared behavior
+  let(:chef_run) do
+    ChefSpec::SoloRunner.new(file_cache_path: "/var/chef/cache") do |node|
+      node.set["monit"]["binary_install"] = true
+    end.converge(described_recipe)
+  end
+
+  specify do
+    expect(chef_run).to create_template("/etc/init.d/monit").
+      with_variables lambda { |x|
+        expect(x).to include(prefix: chef_run.node["monit"]["binary"]["prefix"])
+      }
+  end
+
   describe "when binary is not found" do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(file_cache_path: "/var/chef/cache") do |node|
