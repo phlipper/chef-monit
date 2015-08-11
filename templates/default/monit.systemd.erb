@@ -1,0 +1,30 @@
+ <% monit_bin = ::File.join(@prefix, "bin", "monit") %>
+ # This file is systemd template for monit service. To
+ # register # monit with systemd, place the monit.servicefile
+ # to the /lib/systemd/system/ directory and then start it
+ # using systemctl (see bellow).
+ #
+ # Enable monit to start on boot:
+ #         systemctl enable monit.service
+ #
+ # Start monit immediately:
+ #         systemctl start monit.service
+ #
+ # Stop monit:
+ #         systemctl stop monit.service
+ #
+ # Status:
+ #         systemctl status monit.service
+
+ [Unit]
+ Description=Pro-active monitoring utility for unix systems
+ After=network.target
+
+ [Service]
+ Type=simple
+ ExecStart=<%= monit_bin %> -I -c <%= @config %> <%= @opts %>
+ ExecStop=<%= monit_bin %> quit
+ ExecReload=<%= monit_bin %> reload
+
+ [Install]
+ WantedBy=multi-user.target
