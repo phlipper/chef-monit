@@ -16,8 +16,12 @@ monit_dirs.each do |dir|
   end
 end
 
-binary_prefix = node["monit"]["source_install"] ?
-  node["monit"]["source"]["prefix"] : node["monit"]["binary"]["prefix"]
+binary_prefix = \
+  if node["monit"]["source_install"]
+    node["monit"]["source"]["prefix"]
+  else
+    node["monit"]["binary"]["prefix"]
+  end
 
 template "/etc/init.d/monit" do
   source "monit.init.erb"
