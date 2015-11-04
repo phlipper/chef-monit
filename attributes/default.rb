@@ -90,10 +90,10 @@ default["monit"]["version"] = nil
 default["monit"]["source_install"] = false
 default["monit"]["source_uninstall"] = false
 
-default["monit"]["source"]["version"] = "5.12.2"
+default["monit"]["source"]["version"] = "5.15"
 default["monit"]["source"]["prefix"] = "/usr/local"
-default["monit"]["source"]["url"] = "https://mmonit.com/monit/dist/monit-#{node["monit"]["source"]["version"]}.tar.gz"
-default["monit"]["source"]["checksum"] = "8ab0296d1aa2351b1573481592d7b5e06de1edd49dff1b5552839605a450914c"
+default["monit"]["source"]["url"] = "https://bitbucket.org/tildeslash/monit/downloads/monit-#{node["monit"]["source"]["version"]}.tar.gz"
+default["monit"]["source"]["checksum"] = "deada8153dc7e8755f572bc4d790143a92c7a8668dccb563ae4dbd73af56697c"
 default["monit"]["source"]["pam_support"] = true
 default["monit"]["source"]["ssl_support"] = true
 default["monit"]["source"]["large_file_support"] = true
@@ -103,7 +103,7 @@ default["monit"]["source"]["compiler_optimized"] = true
 default["monit"]["binary_install"] = false
 default["monit"]["binary_uninstall"] = false
 
-default["monit"]["binary"]["version"] = "5.12.2"
+default["monit"]["binary"]["version"] = "5.15"
 default["monit"]["binary"]["prefix"] = "/usr"
-default["monit"]["binary"]["url"] = "http://mmonit.com/monit/dist/binary/#{node["monit"]["binary"]["version"]}/monit-#{node["monit"]["binary"]["version"]}-linux-x64.tar.gz"
-default["monit"]["binary"]["checksum"] = "4908143752d0ee5081a50389a9206b7c905f9f8922a062a208fecf6e729a3c77"
+default["monit"]["binary"]["url"] = "https://bitbucket.org/tildeslash/monit/downloads/#{node["monit"]["binary"]["version"]}/monit-#{node["monit"]["binary"]["version"]}-linux-x64.tar.gz"
+default["monit"]["binary"]["checksum"] = "29427f7be313dee365312389cbb7ff774dfa21f7fe132d74858eda26c4b65e32"
