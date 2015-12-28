@@ -9,7 +9,7 @@ binary = "#{node["monit"]["binary"]["prefix"]}/bin/monit"
 
 execute "rm #{binary}" do
   only_if { ::File.exist?(binary) }
-  not_if "monit -V | grep #{node["monit"]["binary"]["version"]}"
+  not_if "#{node["monit"]["binary"]["prefix"]}/bin/monit -V | grep #{node["monit"]["binary"]["version"]}"
   notifies :create, "remote_file[#{cache_path}/#{tar_file}]", :immediately
 end
 
