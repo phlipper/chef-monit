@@ -17,7 +17,7 @@
 # Source networking configuration.
 . /etc/sysconfig/network
 
-MONIT=/usr/bin/monit
+MONIT="<%= @prefix %>/bin/monit"
 
 # Source monit configuration.
 if [ -f /etc/sysconfig/monit ] ; then
