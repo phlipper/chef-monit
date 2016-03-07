@@ -1,7 +1,7 @@
 check system <%= node["fqdn"] %>
-  if loadavg (1min) > 4 for 2 cycles then alert
-  if loadavg (5min) > 2 for 2 cycles then alert
-  if memory usage > 75% for 2 cycles then alert
-  if cpu usage (user) > 70% for 2 cycles then alert
-  if cpu usage (system) > 30% for 2 cycles then alert
-  if cpu usage (wait) > 20% for 2 cycles then alert
+  if loadavg (1min) > <%= node["monit"]["loadavg"]["1min"]["value"] %> for <%= node["monit"]["loadavg"]["1min"]["cycles"] %> cycles then alert
+  if loadavg (5min) > <%= node["monit"]["loadavg"]["5min"]["value"] %> for <%= node["monit"]["loadavg"]["5min"]["cycles"] %> cycles then alert
+  if memory usage > <%= node["monit"]["memory"]["value"] %> for <%= node["monit"]["memory"]["cycles"] %> cycles then alert
+  if cpu usage (user) > <%= node["monit"]["cpu"]["user"]["value"] %> for <%= node["monit"]["cpu"]["user"]["cycles"] %> cycles then alert
+  if cpu usage (system) > <%= node["monit"]["cpu"]["system"]["value"] %> for <%= node["monit"]["cpu"]["system"]["cycles"] %> cycles then alert
+  if cpu usage (wait) > <%= node["monit"]["cpu"]["wait"]["value"] %> for <%= node["monit"]["cpu"]["wait"]["cycles"] %> cycles then alert
