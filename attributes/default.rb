@@ -107,3 +107,22 @@ default["monit"]["binary"]["version"] = "5.12.2"
 default["monit"]["binary"]["prefix"] = "/usr"
 default["monit"]["binary"]["url"] = "http://mmonit.com/monit/dist/binary/#{node["monit"]["binary"]["version"]}/monit-#{node["monit"]["binary"]["version"]}-linux-x64.tar.gz"
 default["monit"]["binary"]["checksum"] = "4908143752d0ee5081a50389a9206b7c905f9f8922a062a208fecf6e729a3c77"
+
+# default resource limits
+default["monit"]["loadavg"]["1min"]["value"] = 4
+default["monit"]["loadavg"]["1min"]["cycles"] = 2
+
+default["monit"]["loadavg"]["5min"] = 2
+default["monit"]["loadavg"]["cycles"] = 2
+
+default["monit"]["memory"]["value"] = "75%"
+default["monit"]["memory"]["cycles"] = 2
+
+default["monit"]["cpu"]["user"]["value"] = "70%"
+default["monit"]["cpu"]["user"]["cycles"] = 2
+
+default["monit"]["cpu"]["system"]["value"] = "30%"
+default["monit"]["cpu"]["system"]["cycles"] = 2
+
+default["monit"]["cpu"]["wait"]["value"] = "20%"
+default["monit"]["cpu"]["wait"]["cycles"] = 2
