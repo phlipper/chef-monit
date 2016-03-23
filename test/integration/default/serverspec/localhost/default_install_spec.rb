@@ -28,7 +28,7 @@ describe "Default install of monit" do
     end
 
     if redhat?
-      its(:stdout) { should match(/The Monit daemon \d\.\d\.\d uptime: \d+m/) }
+      its(:stdout) { should match(/The Monit daemon \d\.\d+ uptime: \d+m/) }
     else
       its(:stdout) { should match(/status\s+(Initializing|Running)/) }
     end
